@@ -1,0 +1,45 @@
+<!-- Chart dependencies -->
+<script src="../templates/chart-deps.tpl.html" data-include data-vars='{"root": "{{root}}"}'></script>
+
+<!-- Polyfills, custom functions and constants -->
+<script type="text/javascript" src="{{root}}/static/polyfills.min.js"></script>
+
+<!-- Custom styles -->
+<link rel="stylesheet" href="{{root}}/third_party/picnic/picnic.min.css" />
+<link rel="stylesheet" href="{{root}}/static/styles.min.css" />
+
+<!-- Wrap the whole widget into a DIV -->
+<div>
+    <script>
+        (async function () {
+
+            // Keep track of the root element since it will not be possible after async operations
+            const rootElement = document.currentScript.parentElement;
+
+            // Get the district ID from the search params
+            const districtId = new URLSearchParams(location.search).get('district_id');
+
+            // Get the district metadata
+            const metadata = await loadCSV(CURRENT_OPTIONS['tcm-metadata-url']);
+            const districtMetadata = metadata.filter(row => row.district_id === districtId)[0];
+            const districtName = String(districtMetadata.district_name).titleCase().replace('School District', '');
+
+            // Create a new element to hold the data and add it to the page
+            const elem = document.createElement('table');
+            rootElement.prepend(elem);
+
+            // Fill the elements with data
+            let tableData = `<tr><th colspan=2>${districtMetadata.district_name} School District Information</th></tr>`;
+            if (districtMetadata.school_count) {
+                tableData += `<tr><td><b>Number of Schools</b></td><td>${districtMetadata.school_count}</td></tr>`;
+            }
+            if (districtMetadata.student_count) {
+                tableData += `<tr><td><b>Total Student Count</b></td><td>${districtMetadata.student_count}</td></tr>`;
+            }
+            if (districtMetadata.teacher_count) {
+                tableData += `<tr><td><b>Total Teacher Count</b></td><td>${districtMetadata.teacher_count}</td></tr>`;
+            }
+            elem.innerHTML = tableData;
+        })();
+    </script>
+</div>

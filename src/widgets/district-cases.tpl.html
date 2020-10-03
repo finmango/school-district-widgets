@@ -1,0 +1,63 @@
+<!-- Chart dependencies -->
+<script src="../templates/chart-deps.tpl.html" data-include data-vars='{"root": "{{root}}"}'></script>
+
+<!-- Polyfills, custom functions and constants -->
+<script type="text/javascript" src="{{root}}/static/polyfills.min.js"></script>
+
+<!-- Custom styles -->
+<link rel="stylesheet" href="{{root}}/third_party/picnic/picnic.min.css" />
+<link rel="stylesheet" href="{{root}}/static/styles.min.css" />
+
+<!-- Wrap the whole widget into a DIV -->
+<div>
+    <script>
+        (async function () {
+
+            // Keep track of the root element since it will not be possible after async operations
+            const rootElement = document.currentScript.parentElement;
+
+            // Get the district ID from the search params
+            const districtId = new URLSearchParams(location.search).get('district_id');
+
+            // Get the district metadata
+            const metadata = await loadCSV(CURRENT_OPTIONS['tcm-metadata-url']);
+            const districtMetadata = metadata.filter(row => row.district_id === districtId)[0];
+
+            // Get the district case data
+            const allDistrictData = await loadCSV(CURRENT_OPTIONS['tcm-data-url']);
+            const districtData = allDistrictData.filter(row => row.district_id === districtId);
+
+            const sumDistrictData = districtData.reduce((dict, row) => {
+                dict['sum_student_cases'] += parseInt(row['new_student_cases']) || 0;
+                dict['sum_staff_cases'] += parseInt(row['new_student_cases']) || 0;
+                return dict;
+            }, { 'sum_student_cases': 0, 'sum_staff_cases': 0 });
+            const latestDistrictData = districtData[districtData.length - 1] || {};
+            const studentCaseCount = latestDistrictData.cumulative_student_cases || sumDistrictData.sum_student_cases;
+            const staffCaseCount = latestDistrictData.cumulative_staff_cases || sumDistrictData.sum_staff_cases;
+
+            if (studentCaseCount) {
+                // Create a new element to hold the data and add it to the page
+                const elem = document.createElement('table');
+                rootElement.prepend(elem);
+
+                // Fill the elements with data
+                let tableData = `<tr><th colspan=2>${districtMetadata.district_name} School District Cases</th></tr>`;
+                if (studentCaseCount) {
+                    tableData += `<tr><td><b>Total Student Cases</b></td><td>${studentCaseCount}</td></tr>`;
+                }
+                if (staffCaseCount) {
+                    tableData += `<tr><td><b>Total Staff Cases</b></td><td>${staffCaseCount}</td></tr>`;
+                }
+                if (latestDistrictData.date) {
+                    tableData += `<tr><td><b>Last Updated</b></td><td>${latestDistrictData.date}</td></tr>`;
+                }
+                elem.innerHTML = tableData;
+
+            } else {
+                rootElement.style.display = 'none';
+            }
+
+        })();
+    </script>
+</div>

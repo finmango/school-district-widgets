@@ -1,0 +1,67 @@
+<!-- Chart dependencies -->
+<script src="../templates/chart-deps.tpl.html" data-include data-vars='{"root": "{{root}}"}'></script>
+
+<!-- Wrap the whole widget into a DIV -->
+<div>
+    <script>
+        (async function () {
+
+            async function findLocationKey() {
+                const districtId = new URLSearchParams(location.search).get('district_id');
+                const metadata = await loadCSV(`${CURRENT_OPTIONS['tcm-metadata-url']}`);
+                const districtMetadata = metadata.filter(row => row.district_id === districtId)[0];
+                const zipIndex = await loadCSV('{{root}}/static/zip-fips-map.csv');
+                const fips = zipIndex.filter(row => row.zip === districtMetadata.zip_code)[0].fips;
+                return `US_${districtMetadata.state}_${fips}`;
+            }
+
+            // Human-friendly label for a symptom
+            const symptomLabel = column => column.split('_').slice(2).join(' ');
+
+            // Keep track of the root element since it will not be possible after async operations
+            const rootElement = document.currentScript.parentElement;
+
+            // Get the location key from the district metadata
+            const locationKey = await findLocationKey();
+
+            // Load the location data using the location key
+            const locationData = await loadCSV(`${CURRENT_OPTIONS['cod-data-url']}/${locationKey}/main.csv`);
+
+            // Get the name of the location from the location data
+            const locationName = locationData[0].subregion2_name;
+
+            // Put the symptom search trends data into a table and draw it in the chart
+            const symptoms = ['search_trends_fever', 'search_trends_cough', 'search_trends_pneumonia'];
+            const data = locationData
+                .filter(row => symptoms.some(col => row[col] !== ""))
+                .map(row => {
+                    const record = { 'Date': row.date };
+                    symptoms.forEach(col => record[symptomLabel(col)] = parseFloat(row[col]));
+                    return record;
+                });
+
+            // Only load the chart if there is data available
+            if (data.filter(row => symptoms.every(col => row[col])).length > 30) {
+                const elem = document.createElement('div');
+                rootElement.prepend(elem);
+
+                await google.charts.load('current', { packages: ['corechart'] });
+                const chartObject = new google.visualization.LineChart(elem);
+                chartObject.draw(recordsToDataTable(data), {
+                    title: `Google Search Trends in ${locationName}`,
+                    theme: 'material',
+                    curveType: 'function',
+                    legend: { position: 'in' },
+                    chartArea: { width: '100%', height: '100%', left: 12, bottom: 48 },
+                    titlePosition: 'in', axisTitlesPosition: 'in',
+                    hAxis: { textPosition: 'bottom' }, vAxis: { textPosition: 'in', viewWindow: { min: 0 } },
+                    height: 300,
+                });
+
+            } else {
+                rootElement.style.display = 'none';
+            }
+
+        })();
+    </script>
+</div>

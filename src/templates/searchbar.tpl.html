@@ -1,0 +1,39 @@
+<div class="centered fullwidth">
+    <input disabled id="location-selector" type="search" placeholder="Search for any location" results="0" />
+</div>
+<script>
+    loadData(['index'], (name, table) => {
+        const records = tableToRecords(table);
+        const locationLabelMap = records.map(row => {
+            let label = '';
+            switch (row.aggregation_level) {
+                case 0:
+                    label = `${row.country_name} [${row.key}]`
+                    return { value: row.key, label: label };
+                case 1:
+                    label = `${row.subregion1_name}, ${row.country_name} [${row.key}]`;
+                    return { value: row.key, label: label };
+                case 2:
+                    label = `${row.subregion2_name}, ${row.subregion1_name} ${row.country_code} [${row.key}]`;
+                    return { value: row.key, label: label };
+                case 3:
+                    label = `${row.locality_name}, ${row.subregion1_name} ${row.country_code} [${row.key}]`;
+                    return { value: row.key, label: label };
+                default:
+                    console.error(`Unknown aggregation level for record:`);
+                    console.error(row);
+            }
+        }).filter(row => row && row.value && row.label);
+        $("#location-selector").autocomplete({
+            minLength: 2,
+            source: locationLabelMap,
+            select: function (event, ui) {
+                const key = ui.item.value;
+                if (locationLabelMap.map(row => row.value).indexOf(key) !== -1) {
+                    window.goto(`{{url-prefix}}?key=${key}`);
+                }
+            }
+        });
+        $('#location-selector').attr('disabled', false);
+    });
+</script>

@@ -1,0 +1,27 @@
+<!-- Google Charts -->
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<!-- JQuery and plugins -->
+<script type="text/javascript" src="{{root}}/third_party/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="{{root}}/third_party/jquery-csv/src/jquery.csv.min.js"></script>
+
+<!-- Custom dependencies for data handling -->
+<script type="text/javascript" src="{{root}}/static/data-loader.min.js"></script>
+
+<!-- Configuration loading -->
+<script type="text/javascript">
+
+    // Define constants and default options
+    DEFAULT_OPTIONS = window.DEFAULT_OPTIONS || {
+        'tcm-metadata-url': 'https://storage.googleapis.com/school-districts/school-districts-metadata.csv',
+        'cod-data-url': 'https://storage.googleapis.com/covid19-open-data/v3',
+        'tcm-data-url': 'https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv',
+        'history-size': 21,
+        'chart-style': 'bar',
+        'epi-reporting': 'daily',
+    }
+
+    // Read options from session storage
+    CURRENT_OPTIONS = window.CURRENT_OPTIONS || Object.keys(DEFAULT_OPTIONS).reduce((acc, key) =>
+        Object.assign(acc, { [key]: sessionStorage.getItem(key) || DEFAULT_OPTIONS[key] }), {});
+</script>
