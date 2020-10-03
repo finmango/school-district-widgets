@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <title>School District Widgets</title>
     <meta name="description" content="Interactive widgets for the school district covid data">
-    <link rel="icon" type="image/png" href="../static/logo-64.png">
+    <link rel="icon" type="image/png" href="./static/logo-64.png">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -11,28 +11,28 @@
     <meta name="apple-mobile-web-app-title" content="School District Widgets">
 
     <!-- Homescreen icons -->
-    <link rel="apple-touch-icon" href="../static/icon-64x64.png">
-    <link rel="apple-touch-icon" sizes="64x64" href="../static/icon-64x64.png">
-    <link rel="apple-touch-icon" sizes="128x128" href="../static/icon-128x128.png">
-    <link rel="apple-touch-icon" sizes="512x512" href="../static/icon-512x512.png">
+    <link rel="apple-touch-icon" href="./static/icon-64x64.png">
+    <link rel="apple-touch-icon" sizes="64x64" href="./static/icon-64x64.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="./static/icon-128x128.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="./static/icon-512x512.png">
 
     <!-- Capabilities-related metadata -->
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
     <!-- JQuery and plugins -->
-    <script type="text/javascript" src="../third_party/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="../third_party/jquery-ui-dist/jquery-ui.min.js"></script>
-    <link rel="stylesheet" href="../third_party/jquery-ui-dist/jquery-ui.min.css">
+    <script type="text/javascript" src="./third_party/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="./third_party/jquery-ui-dist/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="./third_party/jquery-ui-dist/jquery-ui.min.css">
 
     <!-- MomentJS -->
-    <script type="text/javascript" src="../third_party/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="./third_party/moment/min/moment.min.js"></script>
 
     <!-- Custom styles -->
-    <link rel="stylesheet" href="../third_party/picnic/picnic.min.css">
-    <link rel="stylesheet" href="../static/styles.min.css">
+    <link rel="stylesheet" href="./third_party/picnic/picnic.min.css">
+    <link rel="stylesheet" href="./static/styles.min.css">
 
     <!-- Polyfills, custom functions and constants -->
-    <script type="text/javascript" src="../static/polyfills.min.js"></script>
+    <script type="text/javascript" src="./static/polyfills.min.js"></script>
 
 
 <!-- Chart dependencies -->
@@ -40,11 +40,11 @@
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 <!-- JQuery and plugins -->
-<script type="text/javascript" src="../third_party/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="../third_party/jquery-csv/src/jquery.csv.min.js"></script>
+<script type="text/javascript" src="./third_party/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="./third_party/jquery-csv/src/jquery.csv.min.js"></script>
 
 <!-- Custom dependencies for data handling -->
-<script type="text/javascript" src="../static/data-loader.min.js"></script>
+<script type="text/javascript" src="./static/data-loader.min.js"></script>
 
 <!-- Configuration loading -->
 <script type="text/javascript">DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv","history-size":21,"chart-style":"bar","epi-reporting":"daily"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((s,t)=>Object.assign(s,{[t]:sessionStorage.getItem(t)||DEFAULT_OPTIONS[t]}),{});</script>
@@ -70,11 +70,11 @@
 <script type="text/javascript">DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv","history-size":21,"chart-style":"bar","epi-reporting":"daily"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((s,t)=>Object.assign(s,{[t]:sessionStorage.getItem(t)||DEFAULT_OPTIONS[t]}),{});</script>
 
 <!-- Polyfills, custom functions and constants -->
-<script type="text/javascript" src="../static/polyfills.min.js"></script>
+<script type="text/javascript" src="./static/polyfills.min.js"></script>
 
 <!-- Custom styles -->
-<link rel="stylesheet" href="../third_party/picnic/picnic.min.css">
-<link rel="stylesheet" href="../static/styles.min.css">
+<link rel="stylesheet" href="./third_party/picnic/picnic.min.css">
+<link rel="stylesheet" href="./static/styles.min.css">
 
 <!-- Wrap the whole widget into a DIV -->
 <div>
@@ -100,11 +100,11 @@
 <script type="text/javascript">DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv","history-size":21,"chart-style":"bar","epi-reporting":"daily"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((s,t)=>Object.assign(s,{[t]:sessionStorage.getItem(t)||DEFAULT_OPTIONS[t]}),{});</script>
 
 <!-- Polyfills, custom functions and constants -->
-<script type="text/javascript" src="../static/polyfills.min.js"></script>
+<script type="text/javascript" src="./static/polyfills.min.js"></script>
 
 <!-- Custom styles -->
-<link rel="stylesheet" href="../third_party/picnic/picnic.min.css">
-<link rel="stylesheet" href="../static/styles.min.css">
+<link rel="stylesheet" href="./third_party/picnic/picnic.min.css">
+<link rel="stylesheet" href="./static/styles.min.css">
 
 <!-- Wrap the whole widget into a DIV -->
 <div>
@@ -177,7 +177,7 @@
 
 <!-- Wrap the whole widget into a DIV -->
 <div>
-    <script>!async function(){const t=document.createElement("div");document.currentScript.parentElement.prepend(t);const i=await async function(){const t=new URLSearchParams(location.search).get("district_id"),i=(await loadCSV(`${CURRENT_OPTIONS["tcm-metadata-url"]}`)).filter(i=>i.district_id===t)[0],e=(await loadCSV("../static/zip-fips-map.csv")).filter(t=>t.zip===i.zip_code)[0].fips;return`US_${i.state}_${e}`}(),e=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${i}/main.csv`),a=e[0].subregion2_name,n=e.filter(t=>""!==t.new_confirmed).map(t=>({Date:t.date,Cases:parseInt(t.new_confirmed)}));await google.charts.load("current",{packages:["corechart"]}),new google.visualization.ColumnChart(t).draw(recordsToDataTable(n),{title:`Confirmed cases in ${a}`,theme:"material",legend:{position:"none"},chartArea:{width:"100%",height:"100%",left:12,bottom:48},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:300})}();</script>
+    <script>!async function(){const t=document.createElement("div");document.currentScript.parentElement.prepend(t);const i=await async function(){const t=new URLSearchParams(location.search).get("district_id"),i=(await loadCSV(`${CURRENT_OPTIONS["tcm-metadata-url"]}`)).filter(i=>i.district_id===t)[0],e=(await loadCSV("./static/zip-fips-map.csv")).filter(t=>t.zip===i.zip_code)[0].fips;return`US_${i.state}_${e}`}(),e=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${i}/main.csv`),a=e[0].subregion2_name,n=e.filter(t=>""!==t.new_confirmed).map(t=>({Date:t.date,Cases:parseInt(t.new_confirmed)}));await google.charts.load("current",{packages:["corechart"]}),new google.visualization.ColumnChart(t).draw(recordsToDataTable(n),{title:`Confirmed cases in ${a}`,theme:"material",legend:{position:"none"},chartArea:{width:"100%",height:"100%",left:12,bottom:48},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:300})}();</script>
 </div>
             <div class="spacer"></div>
             <div class="spacer"></div>
@@ -200,7 +200,7 @@
 
 <!-- Wrap the whole widget into a DIV -->
 <div>
-    <script>!async function(){const t=document.currentScript.parentElement,e=await async function(){const t=new URLSearchParams(location.search).get("district_id"),e=(await loadCSV(`${CURRENT_OPTIONS["tcm-metadata-url"]}`)).filter(e=>e.district_id===t)[0],i=(await loadCSV("../static/zip-fips-map.csv")).filter(t=>t.zip===e.zip_code)[0].fips;return`US_${e.state}_${i}`}(),i=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${e}/main.csv`),a=i[0].subregion2_name,n=["search_trends_fever","search_trends_cough","search_trends_pneumonia"],o=i.filter(t=>n.some(e=>""!==t[e])).map(t=>{const e={Date:t.date};return n.forEach(i=>e[(t=>t.split("_").slice(2).join(" "))(i)]=parseFloat(t[i])),e});if(o.filter(t=>n.every(e=>t[e])).length>30){const e=document.createElement("div");t.prepend(e),await google.charts.load("current",{packages:["corechart"]}),new google.visualization.LineChart(e).draw(recordsToDataTable(o),{title:`Google Search Trends in ${a}`,theme:"material",curveType:"function",legend:{position:"in"},chartArea:{width:"100%",height:"100%",left:12,bottom:48},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:300})}else t.style.display="none"}();</script>
+    <script>!async function(){const t=document.currentScript.parentElement,e=await async function(){const t=new URLSearchParams(location.search).get("district_id"),e=(await loadCSV(`${CURRENT_OPTIONS["tcm-metadata-url"]}`)).filter(e=>e.district_id===t)[0],i=(await loadCSV("./static/zip-fips-map.csv")).filter(t=>t.zip===e.zip_code)[0].fips;return`US_${e.state}_${i}`}(),i=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${e}/main.csv`),a=i[0].subregion2_name,n=["search_trends_fever","search_trends_cough","search_trends_pneumonia"],o=i.filter(t=>n.some(e=>""!==t[e])).map(t=>{const e={Date:t.date};return n.forEach(i=>e[(t=>t.split("_").slice(2).join(" "))(i)]=parseFloat(t[i])),e});if(o.filter(t=>n.every(e=>t[e])).length>30){const e=document.createElement("div");t.prepend(e),await google.charts.load("current",{packages:["corechart"]}),new google.visualization.LineChart(e).draw(recordsToDataTable(o),{title:`Google Search Trends in ${a}`,theme:"material",curveType:"function",legend:{position:"in"},chartArea:{width:"100%",height:"100%",left:12,bottom:48},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:300})}else t.style.display="none"}();</script>
 </div>
             <div class="spacer"></div>
             <div class="spacer"></div>
