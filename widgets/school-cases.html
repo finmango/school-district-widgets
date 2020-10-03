@@ -1,0 +1,64 @@
+<!DOCTYPE html><html><!-- HTML page head --><head>
+    <!-- HTML metadata -->
+    <meta charset="UTF-8">
+    <title>School District Widgets</title>
+    <meta name="description" content="Interactive widgets for the school district covid data">
+    <link rel="icon" type="image/png" href="../static/logo-64.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="School District Widgets">
+
+    <!-- Homescreen icons -->
+    <link rel="apple-touch-icon" href="../static/icon-64x64.png">
+    <link rel="apple-touch-icon" sizes="64x64" href="../static/icon-64x64.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="../static/icon-128x128.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="../static/icon-512x512.png">
+
+    <!-- Capabilities-related metadata -->
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    
+    <!-- Google Charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- JQuery and plugins -->
+    <script type="text/javascript" src="../third_party/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="../third_party/jquery-ui-dist/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="../third_party/jquery-csv/src/jquery.csv.min.js"></script>
+    <script type="text/javascript" src="../static/jquery.ui.combobox.min.js"></script>
+    <link rel="stylesheet" href="../third_party/jquery-ui-dist/jquery-ui.min.css">
+
+    <!-- MomentJS -->
+    <script type="text/javascript" src="../third_party/moment/min/moment.min.js"></script>
+
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="../third_party/picnic/picnic.min.css">
+    <link rel="stylesheet" href="../static/styles.min.css">
+
+    <!-- Polyfills, custom functions and constants -->
+    <script type="text/javascript" src="../static/polyfills.min.js"></script>
+    <script type="text/javascript" src="../static/data-loader.min.js"></script>
+    <script type="text/javascript" src="../static/google-charts-helper.min.js"></script>
+    <script type="text/javascript">const DEFAULT_OPTIONS={"cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"../static/latest-school-cases.csv","history-size":21,"chart-style":"bar","epi-reporting":"daily"},CURRENT_OPTIONS=Object.keys(DEFAULT_OPTIONS).reduce((t,s)=>Object.assign(t,{[s]:sessionStorage.getItem(s)||DEFAULT_OPTIONS[s]}),{});</script>
+
+
+</head><body class="single-column">
+
+    <!-- Header with links -->
+    <!-- <script src="../templates/header.tpl.html" data-include data-vars='{"root": ".."}'></script> -->
+
+    <!-- <div class="spacer"></div> -->
+
+    <!-- <main></main> -->
+
+    <div id="chart"></div>
+    <script>async function main(){const o=await loadCSV(`${CURRENT_OPTIONS["tcm-data-url"]}`),a=o.filter(o=>"1921840"==o.district_id);console.log(o),console.log(a)}main();</script>
+
+    <!-- Load analytics at the end of the page -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-53249564-6"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","UA-53249564-6");</script>
+
+
+
+</body></html>
