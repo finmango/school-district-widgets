@@ -18,7 +18,21 @@
 <link rel="stylesheet" href="../third_party/picnic/picnic.min.css">
 <link rel="stylesheet" href="../static/styles.min.css">
 
-<!-- Wrap the whole widget into a DIV -->
-<div style="visibility: hidden;">
-    <script async>!async function(){const t=document.currentScript.parentElement,e=new URLSearchParams(location.search).get("district_id"),c=(await loadCSV(CURRENT_OPTIONS["tcm-metadata-url"])).filter(t=>t.district_id===e)[0],n=(String(c.district_name).titleCase().replace("School District",""),document.createElement("table"));n.style.tableLayout="fixed",n.classList.add("fullwidth"),t.append(n);let r=`<tr><th colspan=2>${c.district_name} School District Information</th></tr>`;c.school_count&&(r+=`<tr><td><b>Number of Schools</b></td><td>${c.school_count}</td></tr>`),c.student_count&&(r+=`<tr><td><b>Total Student Count</b></td><td>${c.student_count}</td></tr>`),c.teacher_count&&(r+=`<tr><td><b>Total Teacher Count</b></td><td>${c.teacher_count}</td></tr>`),n.innerHTML=r,n.parentElement.style.visibility="visible"}();</script>
-</div>
+<!-- Wrap the whole widget into a form -->
+<form id="report-form">
+    <label for="select-state">
+        <h2>Select State*</h2>
+    </label>
+    <select id="select-state" name="state" required disabled>
+        <option value disabled>Select State</option>
+    </select>
+
+    <label for="select-district">
+        <h2>Select District*</h2>
+    </label>
+    <select id="select-district" name="school_district" required disabled>
+        <option value disabled>Select School District</option>
+    </select>
+</form>
+
+<script async>!async function(){function e(e,t,n){const i=document.createElement(e);return Object.assign(i,t),n&&n.append(i),i}function t(e){for(;e.firstChild;)e.removeChild(e.firstChild)}!function(n,i){const o={};n.forEach(e=>{o[e.state]=e.state}),t(i),e("option",{value:"",disabled:!0,innerText:"Select State"},i),Object.keys(o).forEach(t=>{e("option",{value:t,innerText:o[t]},i)}),i.addEventListener("change",o=>{const c=document.querySelector("#select-district");!function(n,i,o){const c={};n.filter(e=>e.state===o).forEach(e=>{c[e.district_id]=String(e.district_name).titleCase()}),t(i),e("option",{value:"",disabled:!0,innerText:"Select School District"},i),Object.keys(c).forEach(t=>{e("option",{value:t,innerText:c[t]},i)}),i.addEventListener("change",e=>{const t=-1===window.location.href.indexOf("/embed/")?"report/index.html":"embed/report.html";window.goto(`../${t}?district_id=${i.value}`)}),i.selectedIndex="0",i.removeAttribute("disabled")}(n,c,i.value)}),i.selectedIndex="0",i.removeAttribute("disabled")}(await loadCSV(CURRENT_OPTIONS["tcm-metadata-url"]),document.querySelector("#select-state"))}();</script>
