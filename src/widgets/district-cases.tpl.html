@@ -10,7 +10,7 @@
 
 <!-- Wrap the whole widget into a DIV -->
 <div>
-    <script>
+    <script async>
         (async function () {
 
             // Keep track of the root element since it will not be possible after async operations
@@ -39,7 +39,7 @@
             if (studentCaseCount) {
                 // Create a new element to hold the data and add it to the page
                 const elem = document.createElement('table');
-                rootElement.prepend(elem);
+                rootElement.append(elem);
 
                 // Fill the elements with data
                 let tableData = `<tr><th colspan=2>${districtMetadata.district_name} School District Cases</th></tr>`;

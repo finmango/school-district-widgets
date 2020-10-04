@@ -71,10 +71,8 @@ gulp.task('build:html', function () {
     const vars = Object.assign({},
         // Dynamically identify variables from package.json
         pckg.vars,
-
         // Add the name and description from the top-level package
         { name: pckg.displayName, description: pckg.description },
-
         // Add variables from context
         { env: env, year: new Date().getFullYear() },
     )
@@ -98,13 +96,10 @@ gulp.task('build:widgets', function () {
     const vars = Object.assign({},
         // Dynamically identify variables from package.json
         pckg.vars,
-
         // Add the name and description from the top-level package
         { name: pckg.displayName, description: pckg.description },
-
         // Add variables from context
         { env: env, year: new Date().getFullYear() },
-
         // Add appropriate root
         { root: '..' },
     )

@@ -3,7 +3,7 @@
 
 <!-- Wrap the whole widget into a DIV -->
 <div>
-    <script>
+    <script async>
         (async function () {
             async function findLocationKey() {
                 const districtId = new URLSearchParams(location.search).get('district_id');
@@ -19,7 +19,7 @@
 
             // Create a new element to hold the chart and add it to the page
             const elem = document.createElement('div');
-            document.currentScript.parentElement.prepend(elem);
+            document.currentScript.parentElement.append(elem);
 
             // Get the location key from the district metadata
             const locationKey = await findLocationKey();
@@ -38,7 +38,7 @@
                     ['Cases']: parseInt(row.new_confirmed)
                 }));
 
-            await google.charts.load('current', { packages: ['corechart'] });
+            await loadGoogleCharts(['corechart']);
             const chartObject = new google.visualization.ColumnChart(elem);
             chartObject.draw(recordsToDataTable(data), {
                 title: `Confirmed cases in ${locationName}`,

@@ -3,7 +3,7 @@
 
 <!-- Wrap the whole widget into a DIV -->
 <div>
-    <script>
+    <script async>
         (async function () {
 
             async function findLocationKey() {
@@ -43,9 +43,9 @@
             // Only load the chart if there is data available
             if (data.filter(row => symptoms.every(col => row[col])).length > 30) {
                 const elem = document.createElement('div');
-                rootElement.prepend(elem);
+                rootElement.append(elem);
 
-                await google.charts.load('current', { packages: ['corechart'] });
+                await loadGoogleCharts(['corechart']);
                 const chartObject = new google.visualization.LineChart(elem);
                 chartObject.draw(recordsToDataTable(data), {
                     title: `Google Search Trends in ${locationName}`,
