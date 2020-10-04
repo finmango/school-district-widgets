@@ -31,7 +31,12 @@
             const locationName = locationData[0].subregion2_name;
 
             // Put the symptom search trends data into a table and draw it in the chart
-            const symptoms = ['search_trends_fever', 'search_trends_cough', 'search_trends_pneumonia'];
+            const symptoms = [
+                'search_trends_fever',
+                'search_trends_cough',
+                'search_trends_common_cold',
+                'search_trends_pneumonia',
+            ];
             const data = locationData
                 .filter(row => symptoms.some(col => row[col] !== ""))
                 .map(row => {
