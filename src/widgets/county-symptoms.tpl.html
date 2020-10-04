@@ -2,7 +2,8 @@
 <script src="../templates/chart-deps.tpl.html" data-include data-vars='{"root": "{{root}}"}'></script>
 
 <!-- Wrap the whole widget into a DIV -->
-<div>
+<div style="visibility: hidden;">
+    <script src="../templates/covid-19-open-data-ref.tpl.html" data-include></script>
     <script async>
         (async function () {
 
@@ -48,7 +49,7 @@
             // Only load the chart if there is data available
             if (data.filter(row => symptoms.every(col => row[col])).length > 30) {
                 const elem = document.createElement('div');
-                rootElement.append(elem);
+                rootElement.prepend(elem);
 
                 await loadGoogleCharts(['corechart']);
                 const chartObject = new google.visualization.LineChart(elem);
@@ -58,6 +59,9 @@
                     legend: { position: 'in' },
                     colors: undefined,  // automatic from material theme
                 }));
+
+                // Unhide element
+                elem.parentElement.style.visibility = 'visible';
 
             } else {
                 rootElement.style.display = 'none';

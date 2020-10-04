@@ -2,7 +2,8 @@
 <script src="../templates/chart-deps.tpl.html" data-include data-vars='{"root": "{{root}}"}'></script>
 
 <!-- Wrap the whole widget into a DIV -->
-<div>
+<div style="visibility: hidden;">
+    <script src="../templates/covid-19-open-data-ref.tpl.html" data-include></script>
     <script async>
         (async function () {
 
@@ -15,7 +16,7 @@
 
             // Create a new element to hold the chart and add it to the page
             const elem = document.createElement('div');
-            document.currentScript.parentElement.append(elem);
+            document.currentScript.parentElement.prepend(elem);
 
             // Get the state code from the district metadata
             const locationKey = await findLocationKey();
@@ -46,6 +47,9 @@
                 title: `Confirmed cases in ${locationName}`,
                 colors: ['#0277BD'],  // material light blue 800
             }));
+
+            // Unhide element
+            elem.parentElement.style.visibility = 'visible';
         })();
     </script>
 </div>

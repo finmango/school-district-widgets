@@ -1,0 +1,100 @@
+<!-- Chart dependencies -->
+<script src="../templates/chart-deps.tpl.html" data-include data-vars='{"root": "{{root}}"}'></script>
+
+<!-- Polyfills, custom functions and constants -->
+<script type="text/javascript" src="{{root}}/static/polyfills.min.js"></script>
+
+<!-- Custom styles -->
+<link rel="stylesheet" href="{{root}}/third_party/picnic/picnic.min.css" />
+<link rel="stylesheet" href="{{root}}/static/styles.min.css" />
+
+<!-- Wrap the whole widget into a form -->
+<form id="report-form">
+    <label for="select-state">
+        <h2>Select State*</h2>
+    </label>
+    <select id="select-state" name="state" required disabled>
+        <option value="" disabled>Select State</option>
+    </select>
+
+    <label for="select-district">
+        <h2>Select District*</h2>
+    </label>
+    <select id="select-district" name="school_district" required disabled>
+        <option value="" disabled>Select School District</option>
+    </select>
+</form>
+
+<script async>
+    (async function () {
+
+        function createElement(tag, attributes, root) {
+            const elem = document.createElement(tag);
+            Object.assign(elem, attributes);
+            if (root) root.append(elem);
+            return elem;
+        }
+
+        function clearChildren(element) {
+            while (element.firstChild) {
+                element.removeChild(element.firstChild);
+            }
+        }
+        // Populate the state choice with the unique values from the districts
+        function populateStates(districts, selectElement) {
+            const labels = {};
+            districts.forEach(row => {
+                labels[row.state] = row.state;
+            });
+
+            // Add a disabled default option
+            clearChildren(selectElement);
+            createElement('option', { value: '', disabled: true, innerText: 'Select State' }, selectElement);
+
+            // Add an option for each state
+            Object.keys(labels).forEach(code => {
+                createElement('option', { value: code, innerText: labels[code] }, selectElement)
+            });
+
+            selectElement.addEventListener('change', event => {
+                const districtSelector = document.querySelector('#select-district');
+                populateDistricts(districts, districtSelector, selectElement.value);
+            });
+
+            // Enable selector
+            selectElement.selectedIndex = '0';
+            selectElement.removeAttribute('disabled');
+        }
+
+        // Populate the districts given a selected state
+        function populateDistricts(districts, selectElement, stateCode) {
+            const labels = {};
+            districts.filter(row => row.state === stateCode).forEach(row => {
+                labels[row.district_id] = String(row.district_name).titleCase();
+            });
+
+            // Add a disabled default option
+            clearChildren(selectElement);
+            createElement('option', { value: '', disabled: true, innerText: 'Select School District' }, selectElement);
+
+            // Add an option for each district
+            Object.keys(labels).forEach(code => {
+                createElement('option', { value: code, innerText: labels[code] }, selectElement)
+            });
+
+            selectElement.addEventListener('change', event => {
+                const path = window.location.href.indexOf('/embed/') === -1 ? 'report/index.html' : 'embed/report.html';
+                window.goto(`{{root}}/${path}?district_id=${selectElement.value}`);
+            });
+
+            // Enable selector
+            selectElement.selectedIndex = '0';
+            selectElement.removeAttribute('disabled');
+        }
+
+        // Get the district metadata
+        const districts = await loadCSV(CURRENT_OPTIONS['tcm-metadata-url']);
+        populateStates(districts, document.querySelector('#select-state'));
+
+    })();
+</script>

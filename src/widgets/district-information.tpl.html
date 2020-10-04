@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="{{root}}/static/styles.min.css" />
 
 <!-- Wrap the whole widget into a DIV -->
-<div>
+<div style="visibility: hidden;">
     <script async>
         (async function () {
 
@@ -42,6 +42,9 @@
                 tableData += `<tr><td><b>Total Teacher Count</b></td><td>${districtMetadata.teacher_count}</td></tr>`;
             }
             elem.innerHTML = tableData;
+
+            // Unhide element
+            elem.parentElement.style.visibility = 'visible';
         })();
     </script>
 </div>

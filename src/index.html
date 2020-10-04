@@ -4,77 +4,16 @@
 <!-- HTML page head -->
 <script src="templates/head.tpl.html" data-include data-vars='{"root": "."}'></script>
 
-<!-- Chart dependencies -->
-<script src="templates/chart-deps.tpl.html" data-include data-vars='{"root": "."}'></script>
-
 <body class="single-column">
+
+    <!-- Page header -->
+    <script src="templates/header.tpl.html" data-include data-vars='{"root": "."}'></script>
 
     <div class="spacer"></div>
 
     <main>
-        <div>
-            <script src="widgets/district-information.tpl.html" data-include data-vars='{"root": "."}'></script>
-            <div class="spacer"></div>
-            <div class="spacer"></div>
-        </div>
-
-        <div>
-            <script src="widgets/district-cases.tpl.html" data-include data-vars='{"root": "."}'></script>
-            <div class="spacer"></div>
-            <div class="spacer"></div>
-        </div>
-
-        <div>
-            <script src="widgets/state-new-cases.tpl.html" data-include data-vars='{"root": "."}'></script>
-            <div class="spacer"></div>
-            <div class="spacer"></div>
-        </div>
-
-        <div>
-            <script src="widgets/state-active-cases.tpl.html" data-include data-vars='{"root": "."}'></script>
-            <div class="spacer"></div>
-            <div class="spacer"></div>
-        </div>
-
-        <div>
-            <script src="widgets/state-symptoms.tpl.html" data-include data-vars='{"root": "."}'></script>
-            <div class="spacer"></div>
-            <div class="spacer"></div>
-        </div>
-
-        <div>
-            <script src="widgets/state-demographics.tpl.html" data-include data-vars='{"root": "."}'></script>
-            <div class="spacer"></div>
-            <div class="spacer"></div>
-        </div>
-
-        <div>
-            <script src="widgets/county-new-cases.tpl.html" data-include data-vars='{"root": "."}'></script>
-            <div class="spacer"></div>
-            <div class="spacer"></div>
-        </div>
-
-        <div>
-            <script src="widgets/county-active-cases.tpl.html" data-include data-vars='{"root": "."}'></script>
-            <div class="spacer"></div>
-            <div class="spacer"></div>
-        </div>
-
-        <div>
-            <script src="widgets/county-symptoms.tpl.html" data-include data-vars='{"root": "."}'></script>
-            <div class="spacer"></div>
-            <div class="spacer"></div>
-        </div>
-
-        <div>
-            <script src="widgets/county-demographics.tpl.html" data-include data-vars='{"root": "."}'></script>
-            <div class="spacer"></div>
-            <div class="spacer"></div>
-        </div>
-
+        <script src="widgets/select-school-district.tpl.html" data-include data-vars='{"root": "."}'></script>
     </main>
-
-    <!-- <div id="chart"></div> -->
 
     <!-- Load analytics at the end of the page -->
     <script src="templates/analytics.tpl.html" data-include></script>
