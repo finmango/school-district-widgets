@@ -27,18 +27,20 @@
             const locationName = locationData[0].subregion1_name;
 
             // Put the confirmed cases from the state data into a table and draw it in the chart
-            const data = locationData
-                .filter(row => row.new_confirmed !== "")
-                .map(row => ({
-                    ['Date']: row.date,
-                    ['Cases']: parseInt(row.new_confirmed)
-                }));
+            const rollingWindowSize = 14;
+            const data = locationData.map((row, idx) => {
+                const start = Math.max(0, idx - rollingWindowSize);
+                const rollingSum = locationData.slice(start, idx)
+                    .reduce((total, row) => total + (parseInt(row.new_confirmed) || 0), 0);
+                return { ['Date']: row.date, ['Cases']: rollingSum };
+            });
 
-                await loadGoogleCharts(['corechart']);
+            await loadGoogleCharts(['corechart']);
             const chartObject = new google.visualization.ColumnChart(elem);
             chartObject.draw(recordsToDataTable(data), {
-                title: `Confirmed cases in ${locationName}`,
+                title: `Estimated active cases in ${locationName}`,
                 theme: 'material',
+                colors: ['#FF9800'],
                 legend: { position: 'none' },
                 chartArea: { width: '100%', height: '100%', left: 12, bottom: 48 },
                 titlePosition: 'in', axisTitlesPosition: 'in',

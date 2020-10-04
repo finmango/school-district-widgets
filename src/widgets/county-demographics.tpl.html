@@ -1,0 +1,66 @@
+<!-- Chart dependencies -->
+<script src="../templates/chart-deps.tpl.html" data-include data-vars='{"root": "{{root}}"}'></script>
+
+<!-- Wrap the whole widget into a DIV -->
+<div>
+    <script async>
+        (async function () {
+            async function findLocationKey() {
+                const districtId = new URLSearchParams(location.search).get('district_id');
+                const metadata = await loadCSV(`${CURRENT_OPTIONS['tcm-metadata-url']}`);
+                const districtMetadata = metadata.filter(row => row.district_id === districtId)[0];
+                const zipIndex = await loadCSV('{{root}}/static/zip-fips-map.csv');
+                const fips = zipIndex.filter(row => row.zip === districtMetadata.zip_code)[0].fips;
+                return `US_${districtMetadata.state}_${fips}`;
+            }
+
+            // Keep track of the root element since it will not be possible after async operations
+            const rootElement = document.currentScript.parentElement;
+
+            // Get the location key from the district metadata
+            const locationKey = await findLocationKey();
+
+            // Load the location data using the location key
+            const locationData = await loadCSV(`${CURRENT_OPTIONS['cod-data-url']}/${locationKey}/main.csv`);
+
+            // Get the name of the location from the location data
+            const locationName = locationData[0].subregion2_name;
+
+            // Only load the chart if there is data available
+            const metadata = locationData[0];
+            const columns = Object.keys(locationData[0]).filter(col => col.startsWith('population_age_'));
+            if (columns.length > 0 && columns.every(col => metadata[col] !== '')) {
+                const elem = document.createElement('div');
+                rootElement.append(elem);
+
+                // Put the population breakdowns from the location data into a table and draw it in the chart
+                const data = columns.map(col => {
+                    return {
+                        'Age Group': col
+                            .replace('population_age_', '')
+                            .replace('_and_older', ' and older')
+                            .replace('_', ' - '),
+                        'Population': parseInt(metadata[col]),
+                    }
+                });
+
+                await loadGoogleCharts(['corechart']);
+                const chartObject = new google.visualization.ColumnChart(elem);
+                chartObject.draw(recordsToDataTable(data), {
+                    title: `Age-stratified demographics of ${locationName}`,
+                    theme: 'material',
+                    colors: ['#3E2723'],
+                    legend: { position: 'none' },
+                    chartArea: { width: '100%', height: '100%', left: 64, bottom: 48 },
+                    titlePosition: 'in', axisTitlesPosition: 'in',
+                    hAxis: { textPosition: 'bottom' }, vAxis: { textPosition: 'out', viewWindow: { min: 0 } },
+                    height: 300,
+                });
+
+            } else {
+                rootElement.style.display = 'none';
+            }
+
+        })();
+    </script>
+</div>
