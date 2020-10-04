@@ -25,7 +25,13 @@
             const locationKey = await findLocationKey();
 
             // Load the location data using the location key
-            const locationData = await loadCSV(`${CURRENT_OPTIONS['cod-data-url']}/${locationKey}/main.csv`);
+            let locationData = await loadCSV(`${CURRENT_OPTIONS['cod-data-url']}/${locationKey}/main.csv`);
+
+            // Use only the last 100 datapoints if this is a touchscreen device
+            if ('ontouchstart' in document.documentElement) {
+                const mobileSubsetSize = 100;
+                locationData = locationData.slice(-mobileSubsetSize);
+            }
 
             // Get the name of the location from the location data
             const locationName = locationData[0].subregion2_name;
