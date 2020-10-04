@@ -52,7 +52,7 @@
             createElement('option', { value: '', disabled: true, innerText: 'Select State' }, selectElement);
 
             // Add an option for each state
-            Object.keys(labels).forEach(code => {
+            Object.keys(labels).sort((a, b) => labels[a].localeCompare(labels[b])).forEach(code => {
                 createElement('option', { value: code, innerText: labels[code] }, selectElement)
             });
 
@@ -78,7 +78,7 @@
             createElement('option', { value: '', disabled: true, innerText: 'Select School District' }, selectElement);
 
             // Add an option for each district
-            Object.keys(labels).forEach(code => {
+            Object.keys(labels).sort((a, b) => labels[a].localeCompare(labels[b])).forEach(code => {
                 createElement('option', { value: code, innerText: labels[code] }, selectElement)
             });
 
