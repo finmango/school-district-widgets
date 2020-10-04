@@ -2,17 +2,16 @@
 <!-- Google Charts -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-<!-- JQuery and plugins -->
-<script type="text/javascript" src="../third_party/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="../third_party/jquery-csv/src/jquery.csv.min.js"></script>
+<!-- CSV Parsing -->
+<script type="text/javascript" src="../third_party/papaparse/papaparse.min.js"></script>
 
 <!-- Custom dependencies for data handling -->
 <script type="text/javascript" src="../static/data-loader.min.js"></script>
 
 <!-- Configuration loading -->
-<script type="text/javascript">DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv","history-size":21,"chart-style":"bar","epi-reporting":"daily"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((s,t)=>Object.assign(s,{[t]:sessionStorage.getItem(t)||DEFAULT_OPTIONS[t]}),{});</script>
+<script type="text/javascript">CACHE=window.CACHE||{CSV:{},gcharts:{}},DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((s,t)=>Object.assign(s,{[t]:sessionStorage.getItem(t)||DEFAULT_OPTIONS[t]}),{});</script>
 
 <!-- Wrap the whole widget into a DIV -->
 <div>
-    <script>!async function(){const t=document.currentScript.parentElement,e=await async function(){const t=new URLSearchParams(location.search).get("district_id"),e=(await loadCSV(`${CURRENT_OPTIONS["tcm-metadata-url"]}`)).filter(e=>e.district_id===t)[0],i=(await loadCSV("../static/zip-fips-map.csv")).filter(t=>t.zip===e.zip_code)[0].fips;return`US_${e.state}_${i}`}(),i=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${e}/main.csv`),a=i[0].subregion2_name,n=["search_trends_fever","search_trends_cough","search_trends_pneumonia"],o=i.filter(t=>n.some(e=>""!==t[e])).map(t=>{const e={Date:t.date};return n.forEach(i=>e[(t=>t.split("_").slice(2).join(" "))(i)]=parseFloat(t[i])),e});if(o.filter(t=>n.every(e=>t[e])).length>30){const e=document.createElement("div");t.prepend(e),await google.charts.load("current",{packages:["corechart"]}),new google.visualization.LineChart(e).draw(recordsToDataTable(o),{title:`Google Search Trends in ${a}`,theme:"material",curveType:"function",legend:{position:"in"},chartArea:{width:"100%",height:"100%",left:12,bottom:48},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:300})}else t.style.display="none"}();</script>
+    <script async>!async function(){const t=document.currentScript.parentElement,e=await async function(){const t=new URLSearchParams(location.search).get("district_id"),e=(await loadCSV(`${CURRENT_OPTIONS["tcm-metadata-url"]}`)).filter(e=>e.district_id===t)[0],i=(await loadCSV("../static/zip-fips-map.csv")).filter(t=>t.zip===e.zip_code)[0].fips;return`US_${e.state}_${i}`}(),i=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${e}/main.csv`),a=i[0].subregion2_name,n=["search_trends_fever","search_trends_cough","search_trends_pneumonia"],o=i.filter(t=>n.some(e=>""!==t[e])).map(t=>{const e={Date:t.date};return n.forEach(i=>e[(t=>t.split("_").slice(2).join(" "))(i)]=parseFloat(t[i])),e});if(o.filter(t=>n.every(e=>t[e])).length>30){const e=document.createElement("div");t.append(e),await loadGoogleCharts(["corechart"]),new google.visualization.LineChart(e).draw(recordsToDataTable(o),{title:`Google Search Trends in ${a}`,theme:"material",curveType:"function",legend:{position:"in"},chartArea:{width:"100%",height:"100%",left:12,bottom:48},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:300})}else t.style.display="none"}();</script>
 </div>

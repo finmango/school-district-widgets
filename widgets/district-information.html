@@ -2,15 +2,14 @@
 <!-- Google Charts -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-<!-- JQuery and plugins -->
-<script type="text/javascript" src="../third_party/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="../third_party/jquery-csv/src/jquery.csv.min.js"></script>
+<!-- CSV Parsing -->
+<script type="text/javascript" src="../third_party/papaparse/papaparse.min.js"></script>
 
 <!-- Custom dependencies for data handling -->
 <script type="text/javascript" src="../static/data-loader.min.js"></script>
 
 <!-- Configuration loading -->
-<script type="text/javascript">DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv","history-size":21,"chart-style":"bar","epi-reporting":"daily"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((s,t)=>Object.assign(s,{[t]:sessionStorage.getItem(t)||DEFAULT_OPTIONS[t]}),{});</script>
+<script type="text/javascript">CACHE=window.CACHE||{CSV:{},gcharts:{}},DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((s,t)=>Object.assign(s,{[t]:sessionStorage.getItem(t)||DEFAULT_OPTIONS[t]}),{});</script>
 
 <!-- Polyfills, custom functions and constants -->
 <script type="text/javascript" src="../static/polyfills.min.js"></script>
@@ -21,5 +20,5 @@
 
 <!-- Wrap the whole widget into a DIV -->
 <div>
-    <script>!async function(){const t=document.currentScript.parentElement,e=new URLSearchParams(location.search).get("district_id"),c=(await loadCSV(CURRENT_OPTIONS["tcm-metadata-url"])).filter(t=>t.district_id===e)[0],r=(String(c.district_name).titleCase().replace("School District",""),document.createElement("table"));t.prepend(r);let n=`<tr><th colspan=2>${c.district_name} School District Information</th></tr>`;c.school_count&&(n+=`<tr><td><b>Number of Schools</b></td><td>${c.school_count}</td></tr>`),c.student_count&&(n+=`<tr><td><b>Total Student Count</b></td><td>${c.student_count}</td></tr>`),c.teacher_count&&(n+=`<tr><td><b>Total Teacher Count</b></td><td>${c.teacher_count}</td></tr>`),r.innerHTML=n}();</script>
+    <script async>!async function(){const t=document.currentScript.parentElement,e=new URLSearchParams(location.search).get("district_id"),c=(await loadCSV(CURRENT_OPTIONS["tcm-metadata-url"])).filter(t=>t.district_id===e)[0],n=(String(c.district_name).titleCase().replace("School District",""),document.createElement("table"));t.append(n);let r=`<tr><th colspan=2>${c.district_name} School District Information</th></tr>`;c.school_count&&(r+=`<tr><td><b>Number of Schools</b></td><td>${c.school_count}</td></tr>`),c.student_count&&(r+=`<tr><td><b>Total Student Count</b></td><td>${c.student_count}</td></tr>`),c.teacher_count&&(r+=`<tr><td><b>Total Teacher Count</b></td><td>${c.teacher_count}</td></tr>`),n.innerHTML=r}();</script>
 </div>

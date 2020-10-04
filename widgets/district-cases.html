@@ -2,15 +2,14 @@
 <!-- Google Charts -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
-<!-- JQuery and plugins -->
-<script type="text/javascript" src="../third_party/jquery/dist/jquery.min.js"></script>
-<script type="text/javascript" src="../third_party/jquery-csv/src/jquery.csv.min.js"></script>
+<!-- CSV Parsing -->
+<script type="text/javascript" src="../third_party/papaparse/papaparse.min.js"></script>
 
 <!-- Custom dependencies for data handling -->
 <script type="text/javascript" src="../static/data-loader.min.js"></script>
 
 <!-- Configuration loading -->
-<script type="text/javascript">DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv","history-size":21,"chart-style":"bar","epi-reporting":"daily"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((s,t)=>Object.assign(s,{[t]:sessionStorage.getItem(t)||DEFAULT_OPTIONS[t]}),{});</script>
+<script type="text/javascript">CACHE=window.CACHE||{CSV:{},gcharts:{}},DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((s,t)=>Object.assign(s,{[t]:sessionStorage.getItem(t)||DEFAULT_OPTIONS[t]}),{});</script>
 
 <!-- Polyfills, custom functions and constants -->
 <script type="text/javascript" src="../static/polyfills.min.js"></script>
@@ -21,5 +20,5 @@
 
 <!-- Wrap the whole widget into a DIV -->
 <div>
-    <script>!async function(){const t=document.currentScript.parentElement,e=new URLSearchParams(location.search).get("district_id"),s=(await loadCSV(CURRENT_OPTIONS["tcm-metadata-url"])).filter(t=>t.district_id===e)[0],a=(await loadCSV(CURRENT_OPTIONS["tcm-data-url"])).filter(t=>t.district_id===e),d=a.reduce((t,e)=>(t.sum_student_cases+=parseInt(e.new_student_cases)||0,t.sum_staff_cases+=parseInt(e.new_student_cases)||0,t),{sum_student_cases:0,sum_staff_cases:0}),c=a[a.length-1]||{},n=c.cumulative_student_cases||d.sum_student_cases,r=c.cumulative_staff_cases||d.sum_staff_cases;if(n){const e=document.createElement("table");t.prepend(e);let a=`<tr><th colspan=2>${s.district_name} School District Cases</th></tr>`;n&&(a+=`<tr><td><b>Total Student Cases</b></td><td>${n}</td></tr>`),r&&(a+=`<tr><td><b>Total Staff Cases</b></td><td>${r}</td></tr>`),c.date&&(a+=`<tr><td><b>Last Updated</b></td><td>${c.date}</td></tr>`),e.innerHTML=a}else t.style.display="none"}();</script>
+    <script async>!async function(){const t=document.currentScript.parentElement,s=new URLSearchParams(location.search).get("district_id"),e=(await loadCSV(CURRENT_OPTIONS["tcm-metadata-url"])).filter(t=>t.district_id===s)[0],a=(await loadCSV(CURRENT_OPTIONS["tcm-data-url"])).filter(t=>t.district_id===s),d=a.reduce((t,s)=>(t.sum_student_cases+=parseInt(s.new_student_cases)||0,t.sum_staff_cases+=parseInt(s.new_student_cases)||0,t),{sum_student_cases:0,sum_staff_cases:0}),c=a[a.length-1]||{},n=c.cumulative_student_cases||d.sum_student_cases,r=c.cumulative_staff_cases||d.sum_staff_cases;if(n){const s=document.createElement("table");t.append(s);let a=`<tr><th colspan=2>${e.district_name} School District Cases</th></tr>`;n&&(a+=`<tr><td><b>Total Student Cases</b></td><td>${n}</td></tr>`),r&&(a+=`<tr><td><b>Total Staff Cases</b></td><td>${r}</td></tr>`),c.date&&(a+=`<tr><td><b>Last Updated</b></td><td>${c.date}</td></tr>`),s.innerHTML=a}else t.style.display="none"}();</script>
 </div>
