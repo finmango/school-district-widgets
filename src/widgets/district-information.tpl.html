@@ -26,6 +26,8 @@
 
             // Create a new element to hold the data and add it to the page
             const elem = document.createElement('table');
+            elem.style.tableLayout = 'fixed';
+            elem.classList.add('fullwidth');
             rootElement.append(elem);
 
             // Fill the elements with data

@@ -23,4 +23,30 @@
     // Read options from session storage
     CURRENT_OPTIONS = window.CURRENT_OPTIONS || Object.keys(DEFAULT_OPTIONS).reduce((acc, key) =>
         Object.assign(acc, { [key]: sessionStorage.getItem(key) || DEFAULT_OPTIONS[key] }), {});
+
+    // Create a default configuration for Google Charts
+    GOOGLE_CHARTS_CONFIG = window.GOOGLE_CHARTS_CONFIG || {
+        theme: 'material',
+        colors: ['{{theme-primary}}'],
+        legend: {
+            position: CURRENT_OPTIONS.chart_legend_position || 'none'
+        },
+        chartArea: {
+            width: '100%',
+            height: '100%',
+            left: parseInt(CURRENT_OPTIONS.chart_padding_left || 64),
+            bottom: parseInt(CURRENT_OPTIONS.chart_padding_bottom || 48),
+            top: parseInt(CURRENT_OPTIONS.chart_padding_top || 24),
+        },
+        titlePosition: 'in',
+        axisTitlesPosition: 'in',
+        hAxis: {
+            textPosition: 'bottom'
+        },
+        vAxis: {
+            textPosition: 'in',
+            viewWindow: { min: 0 }
+        },
+        height: parseInt(CURRENT_OPTIONS.chart_height || 300),
+    }
 </script>

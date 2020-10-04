@@ -29,6 +29,12 @@
                 locationData = locationData.slice(-mobileSubsetSize);
             }
 
+            // Get rid of irrelevant data prior to the first confirmed case
+            const firstConfirmedCaseIndex = locationData
+                .map((row, idx) => !row.new_confirmed || row.new_confirmed === '' ? null : idx)
+                .filter(idx => idx)[0];
+            locationData = locationData.slice(firstConfirmedCaseIndex);
+
             // Get the name of the location from the location data
             const locationName = locationData[0].subregion1_name;
 
@@ -43,16 +49,10 @@
 
             await loadGoogleCharts(['corechart']);
             const chartObject = new google.visualization.ColumnChart(elem);
-            chartObject.draw(recordsToDataTable(data), {
+            chartObject.draw(recordsToDataTable(data), Object.assign({}, GOOGLE_CHARTS_CONFIG, {
                 title: `Estimated active cases in ${locationName}`,
-                theme: 'material',
-                colors: ['#FF9800'],
-                legend: { position: 'none' },
-                chartArea: { width: '100%', height: '100%', left: 12, bottom: 48 },
-                titlePosition: 'in', axisTitlesPosition: 'in',
-                hAxis: { textPosition: 'bottom' }, vAxis: { textPosition: 'in', viewWindow: { min: 0 } },
-                height: 300,
-            });
+                colors: ['{{theme-accent}}'],  // theme accent color
+            }));
         })();
     </script>
 </div>

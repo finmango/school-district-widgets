@@ -47,16 +47,12 @@
 
                 await loadGoogleCharts(['corechart']);
                 const chartObject = new google.visualization.LineChart(elem);
-                chartObject.draw(recordsToDataTable(data), {
+                chartObject.draw(recordsToDataTable(data), Object.assign({}, GOOGLE_CHARTS_CONFIG, {
                     title: `Google Search Trends in ${locationName}`,
-                    theme: 'material',
                     curveType: 'function',
                     legend: { position: 'in' },
-                    chartArea: { width: '100%', height: '100%', left: 12, bottom: 48 },
-                    titlePosition: 'in', axisTitlesPosition: 'in',
-                    hAxis: { textPosition: 'bottom' }, vAxis: { textPosition: 'in', viewWindow: { min: 0 } },
-                    height: 300,
-                });
+                    colors: undefined,  // automatic from material theme
+                }));
 
             } else {
                 rootElement.style.display = 'none';

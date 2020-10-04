@@ -42,15 +42,10 @@
 
             await loadGoogleCharts(['corechart']);
             const chartObject = new google.visualization.ColumnChart(elem);
-            chartObject.draw(recordsToDataTable(data), {
+            chartObject.draw(recordsToDataTable(data), Object.assign({}, GOOGLE_CHARTS_CONFIG, {
                 title: `Confirmed cases in ${locationName}`,
-                theme: 'material',
-                legend: { position: 'none' },
-                chartArea: { width: '100%', height: '100%', left: 12, bottom: 48 },
-                titlePosition: 'in', axisTitlesPosition: 'in',
-                hAxis: { textPosition: 'bottom' }, vAxis: { textPosition: 'in', viewWindow: { min: 0 } },
-                height: 300,
-            });
+                colors: ['#0277BD'],  // material light blue 800
+            }));
         })();
     </script>
 </div>

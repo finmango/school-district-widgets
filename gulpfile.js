@@ -71,6 +71,13 @@ gulp.task('build:html', function () {
     const vars = Object.assign({},
         // Dynamically identify variables from package.json
         pckg.vars,
+        // Colors from the theme defined in package.json
+        {
+            'theme-primary': pckg.vars.theme.primary,
+            'theme-accent': pckg.vars.theme.accent,
+            'theme-background': pckg.vars.theme.background,
+            'theme-text-on-background': pckg.vars.theme['text-on-background']
+        },
         // Add the name and description from the top-level package
         { name: pckg.displayName, description: pckg.description },
         // Add variables from context
@@ -96,6 +103,13 @@ gulp.task('build:widgets', function () {
     const vars = Object.assign({},
         // Dynamically identify variables from package.json
         pckg.vars,
+        // Colors from the theme defined in package.json
+        {
+            'theme-primary': pckg.vars.theme.primary,
+            'theme-accent': pckg.vars.theme.accent,
+            'theme-background': pckg.vars.theme.background,
+            'theme-text-on-background': pckg.vars.theme['text-on-background']
+        },
         // Add the name and description from the top-level package
         { name: pckg.displayName, description: pckg.description },
         // Add variables from context
