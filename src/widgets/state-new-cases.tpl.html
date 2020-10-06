@@ -1,25 +1,16 @@
-<!-- Chart dependencies -->
-<script src="../templates/chart-deps.tpl.html" data-include data-vars='{"root": "{{root}}"}'></script>
-
 <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
     <script src="../templates/covid-19-open-data-ref.tpl.html" data-include></script>
     <script async>
         (async function () {
 
-            async function findLocationKey() {
-                const districtId = new URLSearchParams(location.search).get('district_id');
-                const metadata = await loadCSV(`${CURRENT_OPTIONS['tcm-metadata-url']}`);
-                const districtMetadata = metadata.filter(row => row.district_id === districtId)[0];
-                return `US_${districtMetadata.state}`;
-            }
-
             // Create a new element to hold the chart and add it to the page
             const elem = document.createElement('div');
             document.currentScript.parentElement.prepend(elem);
 
             // Get the state code from the district metadata
-            const locationKey = await findLocationKey();
+            const districtId = getWindowDistrictId(window) || getWindowDistrictId(window.parent);
+            const locationKey = await findStateLocationKey(districtId);
 
             // Load the location data using the location key
             let locationData = await loadCSV(`${CURRENT_OPTIONS['cod-data-url']}/${locationKey}/main.csv`);

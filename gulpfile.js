@@ -95,43 +95,6 @@ gulp.task('build:html', function () {
         .pipe(gulp.dest('public'));
 });
 
-gulp.task('build:widgets', function () {
-    const fs = require('fs')
-    const mancha = require('gulp-mancha')
-    const rename = require('gulp-rename');
-
-    const vars = Object.assign({},
-        // Dynamically identify variables from package.json
-        pckg.vars,
-        // Colors from the theme defined in package.json
-        {
-            'theme-primary': pckg.vars.theme.primary,
-            'theme-accent': pckg.vars.theme.accent,
-            'theme-background': pckg.vars.theme.background,
-            'theme-text-on-background': pckg.vars.theme['text-on-background']
-        },
-        // Add the name and description from the top-level package
-        { name: pckg.displayName, description: pckg.description },
-        // Add variables from context
-        { env: env, year: new Date().getFullYear() },
-        // Add appropriate root
-        { root: '..' },
-    )
-
-    // Perform rendering
-    return gulp.src(['src/widgets/**/*.tpl.html'])
-        .pipe(mancha(vars, {
-            fs: fs,
-            encodeHtmlAttrib: mancha.encodeHtmlAttrib,
-            console: console,
-            canonical: null
-        }))
-        .pipe(rename(function (path) {
-            path.basename = path.basename.replace('.tpl', '');
-        }))
-        .pipe(gulp.dest('public/widgets'));
-});
-
 gulp.task('build:logo', function () {
     const jimp = require('gulp-jimp');
     const imagesizes = [64, 128, 512];
@@ -157,7 +120,7 @@ gulp.task('build:ts', function () {
         .pipe(gulp.dest('dist'));
 });
 
-gulp.task('build:all', gulp.series('build:deps', 'build:css', 'build:logo', 'build:html', 'build:widgets', 'build:ts'));
+gulp.task('build:all', gulp.series('build:deps', 'build:css', 'build:logo', 'build:html', 'build:ts'));
 
 
 // Copy tasks

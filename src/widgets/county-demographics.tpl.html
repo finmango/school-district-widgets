@@ -1,25 +1,15 @@
-<!-- Chart dependencies -->
-<script src="../templates/chart-deps.tpl.html" data-include data-vars='{"root": "{{root}}"}'></script>
-
 <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
     <script src="../templates/covid-19-open-data-ref.tpl.html" data-include></script>
     <script async>
         (async function () {
-            async function findLocationKey() {
-                const districtId = new URLSearchParams(location.search).get('district_id');
-                const metadata = await loadCSV(`${CURRENT_OPTIONS['tcm-metadata-url']}`);
-                const districtMetadata = metadata.filter(row => row.district_id === districtId)[0];
-                const zipIndex = await loadCSV('{{root}}/static/zip-fips-map.csv');
-                const fips = zipIndex.filter(row => row.zip === districtMetadata.zip_code)[0].fips;
-                return `US_${districtMetadata.state}_${fips}`;
-            }
 
             // Keep track of the root element since it will not be possible after async operations
             const rootElement = document.currentScript.parentElement;
 
             // Get the location key from the district metadata
-            const locationKey = await findLocationKey();
+            const districtId = getWindowDistrictId(window) || getWindowDistrictId(window.parent);
+            const locationKey = await findCountyLocationKey(districtId);
 
             // Load the location data using the location key
             const locationData = await loadCSV(`${CURRENT_OPTIONS['cod-data-url']}/${locationKey}/main.csv`);
