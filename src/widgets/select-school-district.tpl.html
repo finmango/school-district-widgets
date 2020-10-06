@@ -1,13 +1,3 @@
-<!-- Chart dependencies -->
-<script src="../templates/chart-deps.tpl.html" data-include data-vars='{"root": "{{root}}"}'></script>
-
-<!-- Polyfills, custom functions and constants -->
-<script type="text/javascript" src="{{root}}/static/polyfills.min.js"></script>
-
-<!-- Custom styles -->
-<link rel="stylesheet" href="{{root}}/third_party/picnic/picnic.min.css" />
-<link rel="stylesheet" href="{{root}}/static/styles.min.css" />
-
 <!-- Wrap the whole widget into a form -->
 <form id="report-form">
     <label for="select-state">
@@ -83,8 +73,9 @@
             });
 
             selectElement.addEventListener('change', event => {
-                const path = window.location.href.indexOf('/embed/') === -1 ? 'report/index.html' : 'embed/report.html';
-                window.location.href = `{{root}}/${path}?district_id=${selectElement.value}`;
+                // Always take users to the full page even if we come from the embedded widget
+                const path = 'report/index.html';
+                window.goto(`{{root}}/${path}?district_id=${selectElement.value}`);
             });
 
             // Enable selector
