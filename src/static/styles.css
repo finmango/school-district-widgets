@@ -215,7 +215,7 @@ button.centered {
 }}
 
 p.footnote {
-    text-align: right;
+    text-align: end;
     font-size: small;
     white-space: nowrap;
     overflow-x: auto;
