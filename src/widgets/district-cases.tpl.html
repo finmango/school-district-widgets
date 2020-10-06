@@ -7,15 +7,15 @@
             const rootElement = document.currentScript.parentElement;
 
             // Get the district ID from the search params
-            const districtId = getWindowDistrictId(window) || getWindowDistrictId(window.parent);
+            const districtId = Number(getWindowDistrictId(window) || getWindowDistrictId(window.parent));
 
             // Get the district metadata
             const metadata = await loadCSV(CURRENT_OPTIONS['tcm-metadata-url']);
-            const districtMetadata = metadata.filter(row => row.district_id === districtId)[0];
+            const districtMetadata = metadata.filter(row => Number(row.district_id) === districtId)[0];
 
             // Get the district case data
             const allDistrictData = await loadCSV(CURRENT_OPTIONS['tcm-data-url']);
-            const districtData = allDistrictData.filter(row => row.district_id === districtId);
+            const districtData = allDistrictData.filter(row => Number(row.district_id) === districtId);
 
             const sumDistrictData = districtData.reduce((dict, row) => {
                 dict['sum_student_cases'] += parseInt(row['new_student_cases']) || 0;

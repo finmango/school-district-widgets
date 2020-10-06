@@ -7,11 +7,11 @@
             const rootElement = document.currentScript.parentElement;
 
             // Get the district ID from the search params
-            const districtId = getWindowDistrictId(window) || getWindowDistrictId(window.parent);
+            const districtId = Number(getWindowDistrictId(window) || getWindowDistrictId(window.parent));
 
             // Get the district metadata
             const metadata = await loadCSV(CURRENT_OPTIONS['tcm-metadata-url']);
-            const districtMetadata = metadata.filter(row => row.district_id === districtId)[0];
+            const districtMetadata = metadata.filter(row => Number(row.district_id) === districtId)[0];
             const districtName = String(districtMetadata.district_name).titleCase().replace('School District', '');
 
             // Create a new element to hold the data and add it to the page
