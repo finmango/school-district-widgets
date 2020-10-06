@@ -42,27 +42,7 @@
     <div class="spacer"></div>
 
     <main>
-        <!-- Chart dependencies -->
-<!-- Google Charts -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-<!-- CSV Parsing -->
-<script type="text/javascript" src="./third_party/papaparse/papaparse.min.js"></script>
-
-<!-- Custom dependencies for data handling -->
-<script type="text/javascript" src="./static/data-loader.min.js"></script>
-
-<!-- Configuration loading -->
-<script type="text/javascript">CACHE=window.CACHE||{CSV:{},gcharts:{}},DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((t,o)=>Object.assign(t,{[o]:sessionStorage.getItem(o)||DEFAULT_OPTIONS[o]}),{}),GOOGLE_CHARTS_CONFIG=window.GOOGLE_CHARTS_CONFIG||{theme:"material",colors:["#FB780F"],legend:{position:CURRENT_OPTIONS.chart_legend_position||"none"},chartArea:{width:"100%",height:"100%",left:parseInt(CURRENT_OPTIONS.chart_padding_left||64),bottom:parseInt(CURRENT_OPTIONS.chart_padding_bottom||48),top:parseInt(CURRENT_OPTIONS.chart_padding_top||24)},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:parseInt(CURRENT_OPTIONS.chart_height||300)};</script>
-
-<!-- Polyfills, custom functions and constants -->
-<script type="text/javascript" src="./static/polyfills.min.js"></script>
-
-<!-- Custom styles -->
-<link rel="stylesheet" href="./third_party/picnic/picnic.min.css">
-<link rel="stylesheet" href="./static/styles.min.css">
-
-<!-- Wrap the whole widget into a form -->
+        <!-- Wrap the whole widget into a form -->
 <form id="report-form">
     <label for="select-state">
         <h2>Select State</h2>
@@ -79,7 +59,7 @@
     </select>
 </form>
 
-<script async>!async function(){function e(e,t,n){const i=document.createElement(e);return Object.assign(i,t),n&&n.append(i),i}function t(e){for(;e.firstChild;)e.removeChild(e.firstChild)}!function(n,i){const o={};n.forEach(e=>{o[e.state]=e.state}),t(i),e("option",{value:"",disabled:!0,innerText:"Select State"},i),Object.keys(o).sort((e,t)=>o[e].localeCompare(o[t])).forEach(t=>{e("option",{value:t,innerText:o[t]},i)}),i.addEventListener("change",o=>{const c=document.querySelector("#select-district");!function(n,i,o){const c={};n.filter(e=>e.state===o).forEach(e=>{c[e.district_id]=String(e.district_name).titleCase()}),t(i),e("option",{value:"",disabled:!0,innerText:"Select School District"},i),Object.keys(c).sort((e,t)=>c[e].localeCompare(c[t])).forEach(t=>{e("option",{value:t,innerText:c[t]},i)}),i.addEventListener("change",e=>{const t=-1===window.location.href.indexOf("/embed/")?"report/index.html":"embed/report.html";window.location.href=`./${t}?district_id=${i.value}`}),i.selectedIndex="0",i.removeAttribute("disabled")}(n,c,i.value)}),i.selectedIndex="0",i.removeAttribute("disabled")}(await loadCSV(CURRENT_OPTIONS["tcm-metadata-url"]),document.querySelector("#select-state"))}();</script>
+<script async>!async function(){function e(e,t,n){const i=document.createElement(e);return Object.assign(i,t),n&&n.append(i),i}function t(e){for(;e.firstChild;)e.removeChild(e.firstChild)}!function(n,i){const o={};n.forEach(e=>{o[e.state]=e.state}),t(i),e("option",{value:"",disabled:!0,innerText:"Select State"},i),Object.keys(o).sort((e,t)=>o[e].localeCompare(o[t])).forEach(t=>{e("option",{value:t,innerText:o[t]},i)}),i.addEventListener("change",o=>{const c=document.querySelector("#select-district");!function(n,i,o){const c={};n.filter(e=>e.state===o).forEach(e=>{c[e.district_id]=String(e.district_name).titleCase()}),t(i),e("option",{value:"",disabled:!0,innerText:"Select School District"},i),Object.keys(c).sort((e,t)=>c[e].localeCompare(c[t])).forEach(t=>{e("option",{value:t,innerText:c[t]},i)}),i.addEventListener("change",e=>{window.goto(`./report/index.html?district_id=${i.value}`)}),i.selectedIndex="0",i.removeAttribute("disabled")}(n,c,i.value)}),i.selectedIndex="0",i.removeAttribute("disabled")}(await loadCSV(CURRENT_OPTIONS["tcm-metadata-url"]),document.querySelector("#select-state"))}();</script>
     </main>
 
     <!-- Load analytics at the end of the page -->
