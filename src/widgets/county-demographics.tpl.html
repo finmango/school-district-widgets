@@ -21,8 +21,7 @@
             const metadata = locationData[0];
             const columns = Object.keys(locationData[0]).filter(col => col.startsWith('population_age_'));
             if (columns.length > 0 && columns.every(col => metadata[col] !== '')) {
-                const elem = document.createElement('div');
-                rootElement.prepend(elem);
+                const elem = attachElement('div', {}, root = rootElement, prepend = true)
 
                 // Put the population breakdowns from the location data into a table and draw it in the chart
                 const data = columns.map(col => {

@@ -15,10 +15,7 @@
             const districtName = String(districtMetadata.district_name).titleCase().replace('School District', '');
 
             // Create a new element to hold the data and add it to the page
-            const elem = document.createElement('table');
-            elem.style.tableLayout = 'fixed';
-            elem.classList.add('fullwidth');
-            rootElement.append(elem);
+            const elem = attachElement('table', { tableLayout: 'fixed', className: 'fullwidth' }, rootElement);
 
             // Fill the elements with data
             const header = `<tr><th colspan=2>${districtMetadata.district_name} School District Information</th></tr>`;
@@ -39,10 +36,8 @@
 
                 // Otherwise cite the source
             } else {
-                const footnote = document.createElement('p');
-                footnote.classList.add('footnote');
-                footnote.innerHTML = `Data from <a href="https://nces.ed.gov/ccd/">NCES Common Core of Data</a>`;
-                rootElement.append(footnote);
+                const citation = `Data from <a href="https://nces.ed.gov/ccd/" target="_blank">NCES Common Core of Data</a>`;
+                attachElement('p', { className: 'footnote', innerHTML: citation }, rootElement)
             }
 
             elem.innerHTML = tableData;

@@ -18,13 +18,6 @@
 <script async>
     (async function () {
 
-        function createElement(tag, attributes, root) {
-            const elem = document.createElement(tag);
-            Object.assign(elem, attributes);
-            if (root) root.append(elem);
-            return elem;
-        }
-
         function clearChildren(element) {
             while (element.firstChild) {
                 element.removeChild(element.firstChild);
@@ -39,11 +32,11 @@
 
             // Add a disabled default option
             clearChildren(selectElement);
-            createElement('option', { value: '', disabled: true, innerText: 'Select State' }, selectElement);
+            attachElement('option', { value: '', disabled: true, innerText: 'Select State' }, selectElement);
 
             // Add an option for each state
             Object.keys(labels).sort((a, b) => labels[a].localeCompare(labels[b])).forEach(code => {
-                createElement('option', { value: code, innerText: labels[code] }, selectElement)
+                attachElement('option', { value: code, innerText: labels[code] }, selectElement)
             });
 
             selectElement.addEventListener('change', event => {
@@ -65,11 +58,11 @@
 
             // Add a disabled default option
             clearChildren(selectElement);
-            createElement('option', { value: '', disabled: true, innerText: 'Select School District' }, selectElement);
+            attachElement('option', { value: '', disabled: true, innerText: 'Select School District' }, selectElement);
 
             // Add an option for each district
             Object.keys(labels).sort((a, b) => labels[a].localeCompare(labels[b])).forEach(code => {
-                createElement('option', { value: code, innerText: labels[code] }, selectElement)
+                attachElement('option', { value: code, innerText: labels[code] }, selectElement)
             });
 
             selectElement.addEventListener('change', event => {

@@ -15,4 +15,20 @@
         }).join(' ');
     };
 
+    /**
+     * Shorthand for creating an element with attributes and attaching it to a root.
+     *
+     * @param {String} tag
+     * @param {Map<String, Object>} attributes
+     * @param {HTMLElement} root
+     * @param {boolean} prepend
+     * @returns {HTMLElement}
+     */
+    window.attachElement = function attachElement(tag, attributes, root = null, prepend = false) {
+        const elem = document.createElement(tag);
+        Object.assign(elem, attributes);
+        if (root) prepend ? root.prepend(elem) : root.append(elem);
+        return elem;
+    };
+
 })();

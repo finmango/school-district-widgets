@@ -28,10 +28,7 @@
 
             if (studentCaseCount) {
                 // Create a new element to hold the data and add it to the page
-                const elem = document.createElement('table');
-                elem.style.tableLayout = 'fixed';
-                elem.classList.add('fullwidth');
-                rootElement.append(elem);
+                const elem = attachElement('table', { tableLayout: 'fixed', className: 'fullwidth' }, rootElement);
 
                 // Fill the elements with data
                 let tableData = `<tr><th colspan=2>${districtMetadata.district_name} School District Cases</th></tr>`;
@@ -48,10 +45,8 @@
 
                 // Add source of data as a footnote if available
                 if (latestDistrictData.source) {
-                    const footnote = document.createElement('p');
-                    footnote.classList.add('footnote');
-                    footnote.innerHTML = `Data from ${latestDistrictData.source}`;
-                    rootElement.append(footnote);
+                    const citation = `Data from ${latestDistrictData.source}`;
+                    attachElement('p', {'className': 'footnote', 'innerHTML': citation}, rootElement);
                 }
 
                 // Unhide element

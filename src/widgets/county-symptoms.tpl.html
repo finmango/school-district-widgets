@@ -37,8 +37,7 @@
 
             // Only load the chart if there is data available
             if (data.filter(row => symptoms.every(col => row[col])).length > 30) {
-                const elem = document.createElement('div');
-                rootElement.prepend(elem);
+                const elem = attachElement('div', {}, root = rootElement, prepend = true)
 
                 await loadGoogleCharts(['corechart']);
                 const chartObject = new google.visualization.LineChart(elem);
