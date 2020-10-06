@@ -24,6 +24,9 @@
     <script type="text/javascript" src="../third_party/moment/min/moment.min.js"></script>
     -->
 
+    <!-- Google Charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
     <!-- Custom styles -->
     <link rel="stylesheet" href="../third_party/picnic/picnic.min.css">
     <link rel="stylesheet" href="../static/styles.min.css">
@@ -31,54 +34,23 @@
     <!-- Polyfills, custom functions and constants -->
     <script type="text/javascript" src="../static/polyfills.min.js"></script>
 
+    <!-- CSV Parsing -->
+    <script type="text/javascript" src="../third_party/papaparse/papaparse.min.js"></script>
 
-<!-- Polyfills, custom functions and constants -->
-<script type="text/javascript" src="../static/polyfills.min.js"></script>
+    <!-- Custom dependencies for data handling -->
+    <script type="text/javascript" src="../static/data-loader.min.js"></script>
 
-<!-- Custom styles -->
-<link rel="stylesheet" href="../third_party/picnic/picnic.min.css">
-<link rel="stylesheet" href="../static/styles.min.css">
+    <!-- Configuration loading -->
+    <script type="text/javascript">CACHE=window.CACHE||{CSV:{},gcharts:{}},DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv","zip-data-url":"../static/zip-fips-map.csv"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((t,o)=>Object.assign(t,{[o]:sessionStorage.getItem(o)||DEFAULT_OPTIONS[o]}),{}),GOOGLE_CHARTS_CONFIG=window.GOOGLE_CHARTS_CONFIG||{theme:"material",colors:["#FB780F"],legend:{position:CURRENT_OPTIONS.chart_legend_position||"none"},chartArea:{width:"100%",height:"100%",left:parseInt(CURRENT_OPTIONS.chart_padding_left||64),bottom:parseInt(CURRENT_OPTIONS.chart_padding_bottom||48),top:parseInt(CURRENT_OPTIONS.chart_padding_top||24)},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:parseInt(CURRENT_OPTIONS.chart_height||300)};</script>
 
-<!-- Chart dependencies -->
-<!-- Google Charts -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-<!-- CSV Parsing -->
-<script type="text/javascript" src="../third_party/papaparse/papaparse.min.js"></script>
-
-<!-- Custom dependencies for data handling -->
-<script type="text/javascript" src="../static/data-loader.min.js"></script>
-
-<!-- Configuration loading -->
-<script type="text/javascript">CACHE=window.CACHE||{CSV:{},gcharts:{}},DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv","zip-data-url":"../static/zip-fips-map.csv"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((t,o)=>Object.assign(t,{[o]:sessionStorage.getItem(o)||DEFAULT_OPTIONS[o]}),{}),GOOGLE_CHARTS_CONFIG=window.GOOGLE_CHARTS_CONFIG||{theme:"material",colors:["#FB780F"],legend:{position:CURRENT_OPTIONS.chart_legend_position||"none"},chartArea:{width:"100%",height:"100%",left:parseInt(CURRENT_OPTIONS.chart_padding_left||64),bottom:parseInt(CURRENT_OPTIONS.chart_padding_bottom||48),top:parseInt(CURRENT_OPTIONS.chart_padding_top||24)},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:parseInt(CURRENT_OPTIONS.chart_height||300)};</script>
 
 </head><body>
     <!-- Load the full report -->
-    <!-- Polyfills, custom functions and constants -->
-<script type="text/javascript" src="../static/polyfills.min.js"></script>
-
-<!-- Custom styles -->
-<link rel="stylesheet" href="../third_party/picnic/picnic.min.css">
-<link rel="stylesheet" href="../static/styles.min.css">
-
-<!-- Chart dependencies -->
-<!-- Google Charts -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-<!-- CSV Parsing -->
-<script type="text/javascript" src="../third_party/papaparse/papaparse.min.js"></script>
-
-<!-- Custom dependencies for data handling -->
-<script type="text/javascript" src="../static/data-loader.min.js"></script>
-
-<!-- Configuration loading -->
-<script type="text/javascript">CACHE=window.CACHE||{CSV:{},gcharts:{}},DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv","zip-data-url":"../static/zip-fips-map.csv"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((t,o)=>Object.assign(t,{[o]:sessionStorage.getItem(o)||DEFAULT_OPTIONS[o]}),{}),GOOGLE_CHARTS_CONFIG=window.GOOGLE_CHARTS_CONFIG||{theme:"material",colors:["#FB780F"],legend:{position:CURRENT_OPTIONS.chart_legend_position||"none"},chartArea:{width:"100%",height:"100%",left:parseInt(CURRENT_OPTIONS.chart_padding_left||64),bottom:parseInt(CURRENT_OPTIONS.chart_padding_bottom||48),top:parseInt(CURRENT_OPTIONS.chart_padding_top||24)},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:parseInt(CURRENT_OPTIONS.chart_height||300)};</script>
-
-<div>
+    <div>
     <div class="spacer"></div>
     <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
-    <script async>!async function(){const t=document.currentScript.parentElement,e=Number(getWindowDistrictId(window)||getWindowDistrictId(window.parent)),i=(await loadCSV(CURRENT_OPTIONS["tcm-metadata-url"])).filter(t=>Number(t.district_id)===e)[0],o=(String(i.district_name).titleCase().replace("School District",""),document.createElement("table"));o.style.tableLayout="fixed",o.classList.add("fullwidth"),t.append(o);const n=`<tr><th colspan=2>${i.district_name} School District Information</th></tr>`;let d=n;i.school_count&&(d+=`<tr><td><b>Number of Schools</b></td><td>${i.school_count}</td></tr>`),i.student_count&&(d+=`<tr><td><b>Total Student Count</b></td><td>${i.student_count}</td></tr>`),i.teacher_count&&(d+=`<tr><td><b>Total Teacher Count</b></td><td>${i.teacher_count}</td></tr>`),d===n&&(d+="<tr><td colspan=2>No data available for this school district</td></tr>"),o.innerHTML=d,o.parentElement.style.visibility="visible"}();</script>
+    <script async>!async function(){const t=document.currentScript.parentElement,e=Number(getWindowDistrictId(window)||getWindowDistrictId(window.parent)),o=(await loadCSV(CURRENT_OPTIONS["tcm-metadata-url"])).filter(t=>Number(t.district_id)===e)[0],n=(String(o.district_name).titleCase().replace("School District",""),document.createElement("table"));n.style.tableLayout="fixed",n.classList.add("fullwidth"),t.append(n);const a=`<tr><th colspan=2>${o.district_name} School District Information</th></tr>`;let c=a;if(o.school_count&&(c+=`<tr><td><b>Number of Schools</b></td><td>${o.school_count}</td></tr>`),o.student_count&&(c+=`<tr><td><b>Total Student Count as of 2019</b></td><td>${o.student_count}</td></tr>`),o.teacher_count&&(c+=`<tr><td><b>Total Teacher Count as of 2019</b></td><td>${o.teacher_count}</td></tr>`),c===a)c+="<tr><td colspan=2>No data available for this school district</td></tr>";else{const e=document.createElement("p");e.classList.add("footnote"),e.innerHTML='Data from <a href="https://nces.ed.gov/ccd/">NCES Common Core of Data</a>',t.append(e)}n.innerHTML=c,n.parentElement.style.visibility="visible"}();</script>
 </div>
 </div>
 
@@ -86,7 +58,7 @@
     <div class="spacer"></div>
     <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
-    <script async>!async function(){const t=document.currentScript.parentElement,e=Number(getWindowDistrictId(window)||getWindowDistrictId(window.parent)),s=(await loadCSV(CURRENT_OPTIONS["tcm-metadata-url"])).filter(t=>Number(t.district_id)===e)[0],a=(await loadCSV(CURRENT_OPTIONS["tcm-data-url"])).filter(t=>Number(t.district_id)===e),d=a.reduce((t,e)=>(t.sum_student_cases+=parseInt(e.new_student_cases)||0,t.sum_staff_cases+=parseInt(e.new_student_cases)||0,t),{sum_student_cases:0,sum_staff_cases:0}),i=a[a.length-1]||{},n=i.cumulative_student_cases||d.sum_student_cases,c=i.cumulative_staff_cases||d.sum_staff_cases;if(n){const e=document.createElement("table");e.style.tableLayout="fixed",e.classList.add("fullwidth"),t.append(e);let a=`<tr><th colspan=2>${s.district_name} School District Cases</th></tr>`;n&&(a+=`<tr><td><b>Total Student Cases</b></td><td>${n}</td></tr>`),c&&(a+=`<tr><td><b>Total Staff Cases</b></td><td>${c}</td></tr>`),i.date&&(a+=`<tr><td><b>Last Updated</b></td><td>${i.date}</td></tr>`),e.innerHTML=a,e.parentElement.style.visibility="visible"}else t.style.display="none"}();</script>
+    <script async>!async function(){const t=document.currentScript.parentElement,e=Number(getWindowDistrictId(window)||getWindowDistrictId(window.parent)),s=(await loadCSV(CURRENT_OPTIONS["tcm-metadata-url"])).filter(t=>Number(t.district_id)===e)[0],a=(await loadCSV(CURRENT_OPTIONS["tcm-data-url"])).filter(t=>Number(t.district_id)===e),d=a.reduce((t,e)=>(t.sum_student_cases+=parseInt(e.new_student_cases)||0,t.sum_staff_cases+=parseInt(e.new_student_cases)||0,t),{sum_student_cases:0,sum_staff_cases:0}),n=a[a.length-1]||{},i=n.cumulative_student_cases||d.sum_student_cases,c=n.cumulative_staff_cases||d.sum_staff_cases;if(i){const e=document.createElement("table");e.style.tableLayout="fixed",e.classList.add("fullwidth"),t.append(e);let a=`<tr><th colspan=2>${s.district_name} School District Cases</th></tr>`;if(i&&(a+=`<tr><td><b>Total Student Cases</b></td><td>${i}</td></tr>`),c&&(a+=`<tr><td><b>Total Staff Cases</b></td><td>${c}</td></tr>`),n.date&&(a+=`<tr><td><b>Last Updated</b></td><td>${n.date}</td></tr>`),e.innerHTML=a,n.source){const e=document.createElement("p");e.classList.add("footnote"),e.innerHTML=`Data from ${n.source}`,t.append(e)}e.parentElement.style.visibility="visible"}else t.style.display="none"}();</script>
 </div>
 </div>
 
