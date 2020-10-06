@@ -73,12 +73,11 @@
     <div class="spacer"></div>
     <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
-    <p style="text-align: end; font-size: small;">
+    <p class="footnote">
     Data from <a href="https://github.com/GoogleCloudPlatform/covid-19-open-data" target="_blank">
         Google's COVID-19 Open Data
     </a>
 </p>
-
     <script async>!async function(){const t=document.createElement("div");document.currentScript.parentElement.prepend(t);const e=getWindowDistrictId(window)||getWindowDistrictId(window.parent),n=await findCountyLocationKey(e);let i=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${n}/main.csv`);if("ontouchstart"in document.documentElement){const t=100;i=i.slice(-t)}const o=i[0].subregion2_name,a=i.filter(t=>""!==t.new_confirmed).map(t=>({Date:t.date,Cases:parseInt(t.new_confirmed)}));await loadGoogleCharts(["corechart"]),new google.visualization.ColumnChart(t).draw(recordsToDataTable(a),Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Confirmed cases in ${o}`,colors:["#0277BD"]})),t.parentElement.style.visibility="visible"}();</script>
 </div>
 </div>
@@ -87,12 +86,11 @@
     <div class="spacer"></div>
     <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
-    <p style="text-align: end; font-size: small;">
+    <p class="footnote">
     Data from <a href="https://github.com/GoogleCloudPlatform/covid-19-open-data" target="_blank">
         Google's COVID-19 Open Data
     </a>
 </p>
-
     <script async>!async function(){const e=document.createElement("div");document.currentScript.parentElement.prepend(e);const t=getWindowDistrictId(window)||getWindowDistrictId(window.parent),n=await findCountyLocationKey(t);let i=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${n}/main.csv`);if("ontouchstart"in document.documentElement){const e=100;i=i.slice(-e)}const a=i.map((e,t)=>e.new_confirmed&&""!==e.new_confirmed?t:null).filter(e=>e)[0],o=(i=i.slice(a))[0].subregion2_name,c=i.map((e,t)=>{const n=Math.max(0,t-14),a=i.slice(n,t).reduce((e,t)=>e+(parseInt(t.new_confirmed)||0),0);return{Date:e.date,Cases:a}});await loadGoogleCharts(["corechart"]),new google.visualization.ColumnChart(e).draw(recordsToDataTable(c),Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Estimated active cases in ${o}`,colors:["#FB780F"]})),e.parentElement.style.visibility="visible"}();</script>
 </div>
 </div>
@@ -101,12 +99,11 @@
     <div class="spacer"></div>
     <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
-    <p style="text-align: end; font-size: small;">
+    <p class="footnote">
     Data from <a href="https://github.com/GoogleCloudPlatform/covid-19-open-data" target="_blank">
         Google's COVID-19 Open Data
     </a>
 </p>
-
     <script async>!async function(){const e=document.currentScript.parentElement,t=getWindowDistrictId(window)||getWindowDistrictId(window.parent),n=await findCountyLocationKey(t),i=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${n}/main.csv`),o=i[0].subregion2_name,a=["search_trends_fever","search_trends_cough","search_trends_common_cold","search_trends_pneumonia"],r=i.filter(e=>a.some(t=>""!==e[t])).map(e=>{const t={Date:e.date};return a.forEach(n=>t[(e=>e.split("_").slice(2).join(" "))(n)]=parseFloat(e[n])),t});if(r.filter(e=>a.every(t=>e[t])).length>30){const t=document.createElement("div");e.prepend(t),await loadGoogleCharts(["corechart"]),new google.visualization.LineChart(t).draw(recordsToDataTable(r),Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Google Search Trends in ${o}`,curveType:"function",legend:{position:"in"},colors:void 0})),t.parentElement.style.visibility="visible"}else e.style.display="none"}();</script>
 </div>
 </div>
@@ -115,12 +112,11 @@
     <div class="spacer"></div>
     <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
-    <p style="text-align: end; font-size: small;">
+    <p class="footnote">
     Data from <a href="https://github.com/GoogleCloudPlatform/covid-19-open-data" target="_blank">
         Google's COVID-19 Open Data
     </a>
 </p>
-
     <script async>!async function(){const t=document.currentScript.parentElement,e=getWindowDistrictId(window)||getWindowDistrictId(window.parent),a=await findCountyLocationKey(e),o=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${a}/main.csv`),i=o[0].subregion2_name,n=o[0],r=Object.keys(o[0]).filter(t=>t.startsWith("population_age_"));if(r.length>0&&r.every(t=>""!==n[t])){const e=document.createElement("div");t.prepend(e);const a=r.map(t=>({"Age Group":t.replace("population_age_","").replace("_and_older"," and older").replace("_"," - "),Population:parseInt(n[t])}));await loadGoogleCharts(["corechart"]);const o=new google.visualization.ColumnChart(e),s=Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Age-stratified demographics of ${i}`,colors:["#4E342E"],vAxis:{textPosition:"out",viewWindow:{min:0}},hAxis:{textPosition:"bottom",slantedText:!1,slantedTextAngle:0}});s.chartArea=Object.assign({},s.chartArea,{bottom:32}),o.draw(recordsToDataTable(a),s),e.parentElement.style.visibility="visible"}else t.style.display="none"}();</script>
 </div>
 </div>
@@ -129,12 +125,11 @@
     <div class="spacer"></div>
     <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
-    <p style="text-align: end; font-size: small;">
+    <p class="footnote">
     Data from <a href="https://github.com/GoogleCloudPlatform/covid-19-open-data" target="_blank">
         Google's COVID-19 Open Data
     </a>
 </p>
-
     <script async>!async function(){const t=document.createElement("div");document.currentScript.parentElement.prepend(t);const e=getWindowDistrictId(window)||getWindowDistrictId(window.parent),n=await findStateLocationKey(e);let i=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${n}/main.csv`);if("ontouchstart"in document.documentElement){const t=100;i=i.slice(-t)}const a=i[0].subregion1_name,o=i.filter(t=>""!==t.new_confirmed).map(t=>({Date:t.date,Cases:parseInt(t.new_confirmed)}));await loadGoogleCharts(["corechart"]),new google.visualization.ColumnChart(t).draw(recordsToDataTable(o),Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Confirmed cases in ${a}`,colors:["#0277BD"]})),t.parentElement.style.visibility="visible"}();</script>
 </div>
 </div>
@@ -143,12 +138,11 @@
     <div class="spacer"></div>
     <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
-    <p style="text-align: end; font-size: small;">
+    <p class="footnote">
     Data from <a href="https://github.com/GoogleCloudPlatform/covid-19-open-data" target="_blank">
         Google's COVID-19 Open Data
     </a>
 </p>
-
     <script async>!async function(){const e=document.createElement("div");document.currentScript.parentElement.prepend(e);const t=getWindowDistrictId(window)||getWindowDistrictId(window.parent),n=await findStateLocationKey(t);let a=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${n}/main.csv`);if("ontouchstart"in document.documentElement){const e=100;a=a.slice(-e)}const i=a.map((e,t)=>e.new_confirmed&&""!==e.new_confirmed?t:null).filter(e=>e)[0],o=(a=a.slice(i))[0].subregion1_name,c=a.map((e,t)=>{const n=Math.max(0,t-14),i=a.slice(n,t).reduce((e,t)=>e+(parseInt(t.new_confirmed)||0),0);return{Date:e.date,Cases:i}});await loadGoogleCharts(["corechart"]),new google.visualization.ColumnChart(e).draw(recordsToDataTable(c),Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Estimated active cases in ${o}`,colors:["#FB780F"]})),e.parentElement.style.visibility="visible"}();</script>
 </div>
 </div>
@@ -157,12 +151,11 @@
     <div class="spacer"></div>
     <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
-    <p style="text-align: end; font-size: small;">
+    <p class="footnote">
     Data from <a href="https://github.com/GoogleCloudPlatform/covid-19-open-data" target="_blank">
         Google's COVID-19 Open Data
     </a>
 </p>
-
     <script async>!async function(){const e=document.createElement("div");document.currentScript.parentElement.prepend(e);const t=getWindowDistrictId(window)||getWindowDistrictId(window.parent),n=await findStateLocationKey(t),a=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${n}/main.csv`),i=a[0].subregion1_name,o=["search_trends_fever","search_trends_cough","search_trends_common_cold","search_trends_pneumonia"],r=a.filter(e=>o.some(t=>""!==e[t])).map(e=>{const t={Date:e.date};return o.forEach(n=>t[(e=>e.split("_").slice(2).join(" "))(n)]=parseFloat(e[n])),t});await loadGoogleCharts(["corechart"]),new google.visualization.LineChart(e).draw(recordsToDataTable(r),Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Google Search Trends in ${i}`,curveType:"function",legend:{position:"in"},colors:void 0})),e.parentElement.style.visibility="visible"}();</script>
 </div>
 </div>
@@ -171,12 +164,11 @@
     <div class="spacer"></div>
     <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
-    <p style="text-align: end; font-size: small;">
+    <p class="footnote">
     Data from <a href="https://github.com/GoogleCloudPlatform/covid-19-open-data" target="_blank">
         Google's COVID-19 Open Data
     </a>
 </p>
-
     <script async>!async function(){const t=document.currentScript.parentElement,e=getWindowDistrictId(window)||getWindowDistrictId(window.parent),a=await findStateLocationKey(e),o=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${a}/main.csv`),i=o[0].subregion1_name,n=o[0],r=Object.keys(o[0]).filter(t=>t.startsWith("population_age_"));if(r.length>0&&r.every(t=>""!==n[t])){const e=document.createElement("div");t.prepend(e);const a=r.map(t=>({"Age Group":t.replace("population_age_","").replace("_and_older"," and older").replace("_"," - "),Population:parseInt(n[t])}));await loadGoogleCharts(["corechart"]);const o=new google.visualization.ColumnChart(e),s=Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Age-stratified demographics of ${i}`,colors:["#4E342E"],vAxis:{textPosition:"out",viewWindow:{min:0}},hAxis:{textPosition:"bottom",slantedText:!1,slantedTextAngle:0}});s.chartArea=Object.assign({},s.chartArea,{bottom:32}),o.draw(recordsToDataTable(a),s),e.parentElement.style.visibility="visible"}else t.style.display="none"}();</script>
 </div>
 </div>
