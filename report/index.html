@@ -41,37 +41,14 @@
 
     <main>
         <!-- Load the full report -->
-        <div>
-    <div class="spacer"></div>
-    <!-- Chart dependencies -->
-<!-- Google Charts -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-<!-- CSV Parsing -->
-<script type="text/javascript" src="../third_party/papaparse/papaparse.min.js"></script>
-
-<!-- Custom dependencies for data handling -->
-<script type="text/javascript" src="../static/data-loader.min.js"></script>
-
-<!-- Configuration loading -->
-<script type="text/javascript">CACHE=window.CACHE||{CSV:{},gcharts:{}},DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((t,o)=>Object.assign(t,{[o]:sessionStorage.getItem(o)||DEFAULT_OPTIONS[o]}),{}),GOOGLE_CHARTS_CONFIG=window.GOOGLE_CHARTS_CONFIG||{theme:"material",colors:["#FB780F"],legend:{position:CURRENT_OPTIONS.chart_legend_position||"none"},chartArea:{width:"100%",height:"100%",left:parseInt(CURRENT_OPTIONS.chart_padding_left||64),bottom:parseInt(CURRENT_OPTIONS.chart_padding_bottom||48),top:parseInt(CURRENT_OPTIONS.chart_padding_top||24)},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:parseInt(CURRENT_OPTIONS.chart_height||300)};</script>
-
-<!-- Polyfills, custom functions and constants -->
+        <!-- Polyfills, custom functions and constants -->
 <script type="text/javascript" src="../static/polyfills.min.js"></script>
 
 <!-- Custom styles -->
 <link rel="stylesheet" href="../third_party/picnic/picnic.min.css">
 <link rel="stylesheet" href="../static/styles.min.css">
 
-<!-- Wrap the whole widget into a DIV -->
-<div style="visibility: hidden;">
-    <script async>!async function(){const t=document.currentScript.parentElement,e=new URLSearchParams(location.search).get("district_id"),c=(await loadCSV(CURRENT_OPTIONS["tcm-metadata-url"])).filter(t=>t.district_id===e)[0],n=(String(c.district_name).titleCase().replace("School District",""),document.createElement("table"));n.style.tableLayout="fixed",n.classList.add("fullwidth"),t.append(n);let r=`<tr><th colspan=2>${c.district_name} School District Information</th></tr>`;c.school_count&&(r+=`<tr><td><b>Number of Schools</b></td><td>${c.school_count}</td></tr>`),c.student_count&&(r+=`<tr><td><b>Total Student Count</b></td><td>${c.student_count}</td></tr>`),c.teacher_count&&(r+=`<tr><td><b>Total Teacher Count</b></td><td>${c.teacher_count}</td></tr>`),n.innerHTML=r,n.parentElement.style.visibility="visible"}();</script>
-</div>
-</div>
-
-<div>
-    <div class="spacer"></div>
-    <!-- Chart dependencies -->
+<!-- Chart dependencies -->
 <!-- Google Charts -->
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
@@ -82,37 +59,27 @@
 <script type="text/javascript" src="../static/data-loader.min.js"></script>
 
 <!-- Configuration loading -->
-<script type="text/javascript">CACHE=window.CACHE||{CSV:{},gcharts:{}},DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((t,o)=>Object.assign(t,{[o]:sessionStorage.getItem(o)||DEFAULT_OPTIONS[o]}),{}),GOOGLE_CHARTS_CONFIG=window.GOOGLE_CHARTS_CONFIG||{theme:"material",colors:["#FB780F"],legend:{position:CURRENT_OPTIONS.chart_legend_position||"none"},chartArea:{width:"100%",height:"100%",left:parseInt(CURRENT_OPTIONS.chart_padding_left||64),bottom:parseInt(CURRENT_OPTIONS.chart_padding_bottom||48),top:parseInt(CURRENT_OPTIONS.chart_padding_top||24)},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:parseInt(CURRENT_OPTIONS.chart_height||300)};</script>
+<script type="text/javascript">CACHE=window.CACHE||{CSV:{},gcharts:{}},DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv","zip-data-url":"../static/zip-fips-map.csv"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((t,o)=>Object.assign(t,{[o]:sessionStorage.getItem(o)||DEFAULT_OPTIONS[o]}),{}),GOOGLE_CHARTS_CONFIG=window.GOOGLE_CHARTS_CONFIG||{theme:"material",colors:["#FB780F"],legend:{position:CURRENT_OPTIONS.chart_legend_position||"none"},chartArea:{width:"100%",height:"100%",left:parseInt(CURRENT_OPTIONS.chart_padding_left||64),bottom:parseInt(CURRENT_OPTIONS.chart_padding_bottom||48),top:parseInt(CURRENT_OPTIONS.chart_padding_top||24)},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:parseInt(CURRENT_OPTIONS.chart_height||300)};</script>
 
-<!-- Polyfills, custom functions and constants -->
-<script type="text/javascript" src="../static/polyfills.min.js"></script>
-
-<!-- Custom styles -->
-<link rel="stylesheet" href="../third_party/picnic/picnic.min.css">
-<link rel="stylesheet" href="../static/styles.min.css">
-
-<!-- Wrap the whole widget into a DIV -->
+<div>
+    <div class="spacer"></div>
+    <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
-    <script async>!async function(){const t=document.currentScript.parentElement,e=new URLSearchParams(location.search).get("district_id"),s=(await loadCSV(CURRENT_OPTIONS["tcm-metadata-url"])).filter(t=>t.district_id===e)[0],a=(await loadCSV(CURRENT_OPTIONS["tcm-data-url"])).filter(t=>t.district_id===e),d=a.reduce((t,e)=>(t.sum_student_cases+=parseInt(e.new_student_cases)||0,t.sum_staff_cases+=parseInt(e.new_student_cases)||0,t),{sum_student_cases:0,sum_staff_cases:0}),c=a[a.length-1]||{},i=c.cumulative_student_cases||d.sum_student_cases,n=c.cumulative_staff_cases||d.sum_staff_cases;if(i){const e=document.createElement("table");e.style.tableLayout="fixed",e.classList.add("fullwidth"),t.append(e);let a=`<tr><th colspan=2>${s.district_name} School District Cases</th></tr>`;i&&(a+=`<tr><td><b>Total Student Cases</b></td><td>${i}</td></tr>`),n&&(a+=`<tr><td><b>Total Staff Cases</b></td><td>${n}</td></tr>`),c.date&&(a+=`<tr><td><b>Last Updated</b></td><td>${c.date}</td></tr>`),e.innerHTML=a,e.parentElement.style.visibility="visible"}else t.style.display="none"}();</script>
+    <script async>!async function(){const t=document.currentScript.parentElement,e=getWindowDistrictId(window)||getWindowDistrictId(window.parent),i=(await loadCSV(CURRENT_OPTIONS["tcm-metadata-url"])).filter(t=>t.district_id===e)[0],o=(String(i.district_name).titleCase().replace("School District",""),document.createElement("table"));o.style.tableLayout="fixed",o.classList.add("fullwidth"),t.append(o);const n=`<tr><th colspan=2>${i.district_name} School District Information</th></tr>`;let d=n;i.school_count&&(d+=`<tr><td><b>Number of Schools</b></td><td>${i.school_count}</td></tr>`),i.student_count&&(d+=`<tr><td><b>Total Student Count</b></td><td>${i.student_count}</td></tr>`),i.teacher_count&&(d+=`<tr><td><b>Total Teacher Count</b></td><td>${i.teacher_count}</td></tr>`),d===n&&(d+="<tr><td colspan=2>No data available for this school district</td></tr>"),o.innerHTML=d,o.parentElement.style.visibility="visible"}();</script>
 </div>
 </div>
 
 <div>
     <div class="spacer"></div>
-    <!-- Chart dependencies -->
-<!-- Google Charts -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- Wrap the whole widget into a DIV -->
+<div style="visibility: hidden;">
+    <script async>!async function(){const t=document.currentScript.parentElement,e=getWindowDistrictId(window)||getWindowDistrictId(window.parent),s=(await loadCSV(CURRENT_OPTIONS["tcm-metadata-url"])).filter(t=>t.district_id===e)[0],a=(await loadCSV(CURRENT_OPTIONS["tcm-data-url"])).filter(t=>t.district_id===e),d=a.reduce((t,e)=>(t.sum_student_cases+=parseInt(e.new_student_cases)||0,t.sum_staff_cases+=parseInt(e.new_student_cases)||0,t),{sum_student_cases:0,sum_staff_cases:0}),i=a[a.length-1]||{},n=i.cumulative_student_cases||d.sum_student_cases,c=i.cumulative_staff_cases||d.sum_staff_cases;if(n){const e=document.createElement("table");e.style.tableLayout="fixed",e.classList.add("fullwidth"),t.append(e);let a=`<tr><th colspan=2>${s.district_name} School District Cases</th></tr>`;n&&(a+=`<tr><td><b>Total Student Cases</b></td><td>${n}</td></tr>`),c&&(a+=`<tr><td><b>Total Staff Cases</b></td><td>${c}</td></tr>`),i.date&&(a+=`<tr><td><b>Last Updated</b></td><td>${i.date}</td></tr>`),e.innerHTML=a,e.parentElement.style.visibility="visible"}else t.style.display="none"}();</script>
+</div>
+</div>
 
-<!-- CSV Parsing -->
-<script type="text/javascript" src="../third_party/papaparse/papaparse.min.js"></script>
-
-<!-- Custom dependencies for data handling -->
-<script type="text/javascript" src="../static/data-loader.min.js"></script>
-
-<!-- Configuration loading -->
-<script type="text/javascript">CACHE=window.CACHE||{CSV:{},gcharts:{}},DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((t,o)=>Object.assign(t,{[o]:sessionStorage.getItem(o)||DEFAULT_OPTIONS[o]}),{}),GOOGLE_CHARTS_CONFIG=window.GOOGLE_CHARTS_CONFIG||{theme:"material",colors:["#FB780F"],legend:{position:CURRENT_OPTIONS.chart_legend_position||"none"},chartArea:{width:"100%",height:"100%",left:parseInt(CURRENT_OPTIONS.chart_padding_left||64),bottom:parseInt(CURRENT_OPTIONS.chart_padding_bottom||48),top:parseInt(CURRENT_OPTIONS.chart_padding_top||24)},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:parseInt(CURRENT_OPTIONS.chart_height||300)};</script>
-
-<!-- Wrap the whole widget into a DIV -->
+<div>
+    <div class="spacer"></div>
+    <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
     <p style="text-align: end; font-size: small;">
     Data from <a href="https://github.com/GoogleCloudPlatform/covid-19-open-data" target="_blank">
@@ -120,26 +87,13 @@
     </a>
 </p>
 
-    <script async>!async function(){const t=document.createElement("div");document.currentScript.parentElement.prepend(t);const e=await async function(){const t=new URLSearchParams(location.search).get("district_id"),e=(await loadCSV(`${CURRENT_OPTIONS["tcm-metadata-url"]}`)).filter(e=>e.district_id===t)[0],a=(await loadCSV("../static/zip-fips-map.csv")).filter(t=>t.zip===e.zip_code)[0].fips;return`US_${e.state}_${a}`}();let a=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${e}/main.csv`);if("ontouchstart"in document.documentElement){const t=100;a=a.slice(-t)}const i=a[0].subregion2_name,n=a.filter(t=>""!==t.new_confirmed).map(t=>({Date:t.date,Cases:parseInt(t.new_confirmed)}));await loadGoogleCharts(["corechart"]),new google.visualization.ColumnChart(t).draw(recordsToDataTable(n),Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Confirmed cases in ${i}`,colors:["#0277BD"]})),t.parentElement.style.visibility="visible"}();</script>
+    <script async>!async function(){const t=document.createElement("div");document.currentScript.parentElement.prepend(t);const e=getWindowDistrictId(window)||getWindowDistrictId(window.parent),n=await findCountyLocationKey(e);let i=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${n}/main.csv`);if("ontouchstart"in document.documentElement){const t=100;i=i.slice(-t)}const o=i[0].subregion2_name,a=i.filter(t=>""!==t.new_confirmed).map(t=>({Date:t.date,Cases:parseInt(t.new_confirmed)}));await loadGoogleCharts(["corechart"]),new google.visualization.ColumnChart(t).draw(recordsToDataTable(a),Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Confirmed cases in ${o}`,colors:["#0277BD"]})),t.parentElement.style.visibility="visible"}();</script>
 </div>
 </div>
 
 <div>
     <div class="spacer"></div>
-    <!-- Chart dependencies -->
-<!-- Google Charts -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-<!-- CSV Parsing -->
-<script type="text/javascript" src="../third_party/papaparse/papaparse.min.js"></script>
-
-<!-- Custom dependencies for data handling -->
-<script type="text/javascript" src="../static/data-loader.min.js"></script>
-
-<!-- Configuration loading -->
-<script type="text/javascript">CACHE=window.CACHE||{CSV:{},gcharts:{}},DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((t,o)=>Object.assign(t,{[o]:sessionStorage.getItem(o)||DEFAULT_OPTIONS[o]}),{}),GOOGLE_CHARTS_CONFIG=window.GOOGLE_CHARTS_CONFIG||{theme:"material",colors:["#FB780F"],legend:{position:CURRENT_OPTIONS.chart_legend_position||"none"},chartArea:{width:"100%",height:"100%",left:parseInt(CURRENT_OPTIONS.chart_padding_left||64),bottom:parseInt(CURRENT_OPTIONS.chart_padding_bottom||48),top:parseInt(CURRENT_OPTIONS.chart_padding_top||24)},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:parseInt(CURRENT_OPTIONS.chart_height||300)};</script>
-
-<!-- Wrap the whole widget into a DIV -->
+    <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
     <p style="text-align: end; font-size: small;">
     Data from <a href="https://github.com/GoogleCloudPlatform/covid-19-open-data" target="_blank">
@@ -147,26 +101,13 @@
     </a>
 </p>
 
-    <script async>!async function(){const t=document.createElement("div");document.currentScript.parentElement.prepend(t);const e=await async function(){const t=new URLSearchParams(location.search).get("district_id"),e=(await loadCSV(`${CURRENT_OPTIONS["tcm-metadata-url"]}`)).filter(e=>e.district_id===t)[0],a=(await loadCSV("../static/zip-fips-map.csv")).filter(t=>t.zip===e.zip_code)[0].fips;return`US_${e.state}_${a}`}();let a=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${e}/main.csv`);if("ontouchstart"in document.documentElement){const t=100;a=a.slice(-t)}const i=a.map((t,e)=>t.new_confirmed&&""!==t.new_confirmed?e:null).filter(t=>t)[0],n=(a=a.slice(i))[0].subregion2_name,c=a.map((t,e)=>{const i=Math.max(0,e-14),n=a.slice(i,e).reduce((t,e)=>t+(parseInt(e.new_confirmed)||0),0);return{Date:t.date,Cases:n}});await loadGoogleCharts(["corechart"]),new google.visualization.ColumnChart(t).draw(recordsToDataTable(c),Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Estimated active cases in ${n}`,colors:["#FB780F"]})),t.parentElement.style.visibility="visible"}();</script>
+    <script async>!async function(){const e=document.createElement("div");document.currentScript.parentElement.prepend(e);const t=getWindowDistrictId(window)||getWindowDistrictId(window.parent),n=await findCountyLocationKey(t);let i=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${n}/main.csv`);if("ontouchstart"in document.documentElement){const e=100;i=i.slice(-e)}const a=i.map((e,t)=>e.new_confirmed&&""!==e.new_confirmed?t:null).filter(e=>e)[0],o=(i=i.slice(a))[0].subregion2_name,c=i.map((e,t)=>{const n=Math.max(0,t-14),a=i.slice(n,t).reduce((e,t)=>e+(parseInt(t.new_confirmed)||0),0);return{Date:e.date,Cases:a}});await loadGoogleCharts(["corechart"]),new google.visualization.ColumnChart(e).draw(recordsToDataTable(c),Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Estimated active cases in ${o}`,colors:["#FB780F"]})),e.parentElement.style.visibility="visible"}();</script>
 </div>
 </div>
 
 <div>
     <div class="spacer"></div>
-    <!-- Chart dependencies -->
-<!-- Google Charts -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-<!-- CSV Parsing -->
-<script type="text/javascript" src="../third_party/papaparse/papaparse.min.js"></script>
-
-<!-- Custom dependencies for data handling -->
-<script type="text/javascript" src="../static/data-loader.min.js"></script>
-
-<!-- Configuration loading -->
-<script type="text/javascript">CACHE=window.CACHE||{CSV:{},gcharts:{}},DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((t,o)=>Object.assign(t,{[o]:sessionStorage.getItem(o)||DEFAULT_OPTIONS[o]}),{}),GOOGLE_CHARTS_CONFIG=window.GOOGLE_CHARTS_CONFIG||{theme:"material",colors:["#FB780F"],legend:{position:CURRENT_OPTIONS.chart_legend_position||"none"},chartArea:{width:"100%",height:"100%",left:parseInt(CURRENT_OPTIONS.chart_padding_left||64),bottom:parseInt(CURRENT_OPTIONS.chart_padding_bottom||48),top:parseInt(CURRENT_OPTIONS.chart_padding_top||24)},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:parseInt(CURRENT_OPTIONS.chart_height||300)};</script>
-
-<!-- Wrap the whole widget into a DIV -->
+    <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
     <p style="text-align: end; font-size: small;">
     Data from <a href="https://github.com/GoogleCloudPlatform/covid-19-open-data" target="_blank">
@@ -174,26 +115,13 @@
     </a>
 </p>
 
-    <script async>!async function(){const e=document.currentScript.parentElement,t=await async function(){const e=new URLSearchParams(location.search).get("district_id"),t=(await loadCSV(`${CURRENT_OPTIONS["tcm-metadata-url"]}`)).filter(t=>t.district_id===e)[0],a=(await loadCSV("../static/zip-fips-map.csv")).filter(e=>e.zip===t.zip_code)[0].fips;return`US_${t.state}_${a}`}(),a=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${t}/main.csv`),i=a[0].subregion2_name,n=["search_trends_fever","search_trends_cough","search_trends_common_cold","search_trends_pneumonia"],r=a.filter(e=>n.some(t=>""!==e[t])).map(e=>{const t={Date:e.date};return n.forEach(a=>t[(e=>e.split("_").slice(2).join(" "))(a)]=parseFloat(e[a])),t});if(r.filter(e=>n.every(t=>e[t])).length>30){const t=document.createElement("div");e.prepend(t),await loadGoogleCharts(["corechart"]),new google.visualization.LineChart(t).draw(recordsToDataTable(r),Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Google Search Trends in ${i}`,curveType:"function",legend:{position:"in"},colors:void 0})),t.parentElement.style.visibility="visible"}else e.style.display="none"}();</script>
+    <script async>!async function(){const e=document.currentScript.parentElement,t=getWindowDistrictId(window)||getWindowDistrictId(window.parent),n=await findCountyLocationKey(t),i=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${n}/main.csv`),o=i[0].subregion2_name,a=["search_trends_fever","search_trends_cough","search_trends_common_cold","search_trends_pneumonia"],r=i.filter(e=>a.some(t=>""!==e[t])).map(e=>{const t={Date:e.date};return a.forEach(n=>t[(e=>e.split("_").slice(2).join(" "))(n)]=parseFloat(e[n])),t});if(r.filter(e=>a.every(t=>e[t])).length>30){const t=document.createElement("div");e.prepend(t),await loadGoogleCharts(["corechart"]),new google.visualization.LineChart(t).draw(recordsToDataTable(r),Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Google Search Trends in ${o}`,curveType:"function",legend:{position:"in"},colors:void 0})),t.parentElement.style.visibility="visible"}else e.style.display="none"}();</script>
 </div>
 </div>
 
 <div>
     <div class="spacer"></div>
-    <!-- Chart dependencies -->
-<!-- Google Charts -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-<!-- CSV Parsing -->
-<script type="text/javascript" src="../third_party/papaparse/papaparse.min.js"></script>
-
-<!-- Custom dependencies for data handling -->
-<script type="text/javascript" src="../static/data-loader.min.js"></script>
-
-<!-- Configuration loading -->
-<script type="text/javascript">CACHE=window.CACHE||{CSV:{},gcharts:{}},DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((t,o)=>Object.assign(t,{[o]:sessionStorage.getItem(o)||DEFAULT_OPTIONS[o]}),{}),GOOGLE_CHARTS_CONFIG=window.GOOGLE_CHARTS_CONFIG||{theme:"material",colors:["#FB780F"],legend:{position:CURRENT_OPTIONS.chart_legend_position||"none"},chartArea:{width:"100%",height:"100%",left:parseInt(CURRENT_OPTIONS.chart_padding_left||64),bottom:parseInt(CURRENT_OPTIONS.chart_padding_bottom||48),top:parseInt(CURRENT_OPTIONS.chart_padding_top||24)},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:parseInt(CURRENT_OPTIONS.chart_height||300)};</script>
-
-<!-- Wrap the whole widget into a DIV -->
+    <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
     <p style="text-align: end; font-size: small;">
     Data from <a href="https://github.com/GoogleCloudPlatform/covid-19-open-data" target="_blank">
@@ -201,26 +129,13 @@
     </a>
 </p>
 
-    <script async>!async function(){const t=document.currentScript.parentElement,e=await async function(){const t=new URLSearchParams(location.search).get("district_id"),e=(await loadCSV(`${CURRENT_OPTIONS["tcm-metadata-url"]}`)).filter(e=>e.district_id===t)[0],a=(await loadCSV("../static/zip-fips-map.csv")).filter(t=>t.zip===e.zip_code)[0].fips;return`US_${e.state}_${a}`}(),a=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${e}/main.csv`),i=a[0].subregion2_name,o=a[0],n=Object.keys(a[0]).filter(t=>t.startsWith("population_age_"));if(n.length>0&&n.every(t=>""!==o[t])){const e=document.createElement("div");t.prepend(e);const a=n.map(t=>({"Age Group":t.replace("population_age_","").replace("_and_older"," and older").replace("_"," - "),Population:parseInt(o[t])}));await loadGoogleCharts(["corechart"]);const s=new google.visualization.ColumnChart(e),r=Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Age-stratified demographics of ${i}`,colors:["#4E342E"],vAxis:{textPosition:"out",viewWindow:{min:0}},hAxis:{textPosition:"bottom",slantedText:!1,slantedTextAngle:0}});r.chartArea=Object.assign({},r.chartArea,{bottom:32}),s.draw(recordsToDataTable(a),r),e.parentElement.style.visibility="visible"}else t.style.display="none"}();</script>
+    <script async>!async function(){const t=document.currentScript.parentElement,e=getWindowDistrictId(window)||getWindowDistrictId(window.parent),a=await findCountyLocationKey(e),o=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${a}/main.csv`),i=o[0].subregion2_name,n=o[0],r=Object.keys(o[0]).filter(t=>t.startsWith("population_age_"));if(r.length>0&&r.every(t=>""!==n[t])){const e=document.createElement("div");t.prepend(e);const a=r.map(t=>({"Age Group":t.replace("population_age_","").replace("_and_older"," and older").replace("_"," - "),Population:parseInt(n[t])}));await loadGoogleCharts(["corechart"]);const o=new google.visualization.ColumnChart(e),s=Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Age-stratified demographics of ${i}`,colors:["#4E342E"],vAxis:{textPosition:"out",viewWindow:{min:0}},hAxis:{textPosition:"bottom",slantedText:!1,slantedTextAngle:0}});s.chartArea=Object.assign({},s.chartArea,{bottom:32}),o.draw(recordsToDataTable(a),s),e.parentElement.style.visibility="visible"}else t.style.display="none"}();</script>
 </div>
 </div>
 
 <div>
     <div class="spacer"></div>
-    <!-- Chart dependencies -->
-<!-- Google Charts -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-<!-- CSV Parsing -->
-<script type="text/javascript" src="../third_party/papaparse/papaparse.min.js"></script>
-
-<!-- Custom dependencies for data handling -->
-<script type="text/javascript" src="../static/data-loader.min.js"></script>
-
-<!-- Configuration loading -->
-<script type="text/javascript">CACHE=window.CACHE||{CSV:{},gcharts:{}},DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((t,o)=>Object.assign(t,{[o]:sessionStorage.getItem(o)||DEFAULT_OPTIONS[o]}),{}),GOOGLE_CHARTS_CONFIG=window.GOOGLE_CHARTS_CONFIG||{theme:"material",colors:["#FB780F"],legend:{position:CURRENT_OPTIONS.chart_legend_position||"none"},chartArea:{width:"100%",height:"100%",left:parseInt(CURRENT_OPTIONS.chart_padding_left||64),bottom:parseInt(CURRENT_OPTIONS.chart_padding_bottom||48),top:parseInt(CURRENT_OPTIONS.chart_padding_top||24)},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:parseInt(CURRENT_OPTIONS.chart_height||300)};</script>
-
-<!-- Wrap the whole widget into a DIV -->
+    <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
     <p style="text-align: end; font-size: small;">
     Data from <a href="https://github.com/GoogleCloudPlatform/covid-19-open-data" target="_blank">
@@ -228,26 +143,13 @@
     </a>
 </p>
 
-    <script async>!async function(){const t=document.createElement("div");document.currentScript.parentElement.prepend(t);const e=await async function(){const t=new URLSearchParams(location.search).get("district_id");return`US_${(await loadCSV(`${CURRENT_OPTIONS["tcm-metadata-url"]}`)).filter(e=>e.district_id===t)[0].state}`}();let a=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${e}/main.csv`);if("ontouchstart"in document.documentElement){const t=100;a=a.slice(-t)}const n=a[0].subregion1_name,i=a.filter(t=>""!==t.new_confirmed).map(t=>({Date:t.date,Cases:parseInt(t.new_confirmed)}));await loadGoogleCharts(["corechart"]),new google.visualization.ColumnChart(t).draw(recordsToDataTable(i),Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Confirmed cases in ${n}`,colors:["#0277BD"]})),t.parentElement.style.visibility="visible"}();</script>
+    <script async>!async function(){const t=document.createElement("div");document.currentScript.parentElement.prepend(t);const e=getWindowDistrictId(window)||getWindowDistrictId(window.parent),n=await findStateLocationKey(e);let i=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${n}/main.csv`);if("ontouchstart"in document.documentElement){const t=100;i=i.slice(-t)}const a=i[0].subregion1_name,o=i.filter(t=>""!==t.new_confirmed).map(t=>({Date:t.date,Cases:parseInt(t.new_confirmed)}));await loadGoogleCharts(["corechart"]),new google.visualization.ColumnChart(t).draw(recordsToDataTable(o),Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Confirmed cases in ${a}`,colors:["#0277BD"]})),t.parentElement.style.visibility="visible"}();</script>
 </div>
 </div>
 
 <div>
     <div class="spacer"></div>
-    <!-- Chart dependencies -->
-<!-- Google Charts -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-<!-- CSV Parsing -->
-<script type="text/javascript" src="../third_party/papaparse/papaparse.min.js"></script>
-
-<!-- Custom dependencies for data handling -->
-<script type="text/javascript" src="../static/data-loader.min.js"></script>
-
-<!-- Configuration loading -->
-<script type="text/javascript">CACHE=window.CACHE||{CSV:{},gcharts:{}},DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((t,o)=>Object.assign(t,{[o]:sessionStorage.getItem(o)||DEFAULT_OPTIONS[o]}),{}),GOOGLE_CHARTS_CONFIG=window.GOOGLE_CHARTS_CONFIG||{theme:"material",colors:["#FB780F"],legend:{position:CURRENT_OPTIONS.chart_legend_position||"none"},chartArea:{width:"100%",height:"100%",left:parseInt(CURRENT_OPTIONS.chart_padding_left||64),bottom:parseInt(CURRENT_OPTIONS.chart_padding_bottom||48),top:parseInt(CURRENT_OPTIONS.chart_padding_top||24)},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:parseInt(CURRENT_OPTIONS.chart_height||300)};</script>
-
-<!-- Wrap the whole widget into a DIV -->
+    <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
     <p style="text-align: end; font-size: small;">
     Data from <a href="https://github.com/GoogleCloudPlatform/covid-19-open-data" target="_blank">
@@ -255,26 +157,13 @@
     </a>
 </p>
 
-    <script async>!async function(){const t=document.createElement("div");document.currentScript.parentElement.prepend(t);const e=await async function(){const t=new URLSearchParams(location.search).get("district_id");return`US_${(await loadCSV(`${CURRENT_OPTIONS["tcm-metadata-url"]}`)).filter(e=>e.district_id===t)[0].state}`}();let a=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${e}/main.csv`);if("ontouchstart"in document.documentElement){const t=100;a=a.slice(-t)}const n=a.map((t,e)=>t.new_confirmed&&""!==t.new_confirmed?e:null).filter(t=>t)[0],i=(a=a.slice(n))[0].subregion1_name,c=a.map((t,e)=>{const n=Math.max(0,e-14),i=a.slice(n,e).reduce((t,e)=>t+(parseInt(e.new_confirmed)||0),0);return{Date:t.date,Cases:i}});await loadGoogleCharts(["corechart"]),new google.visualization.ColumnChart(t).draw(recordsToDataTable(c),Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Estimated active cases in ${i}`,colors:["#FB780F"]})),t.parentElement.style.visibility="visible"}();</script>
+    <script async>!async function(){const e=document.createElement("div");document.currentScript.parentElement.prepend(e);const t=getWindowDistrictId(window)||getWindowDistrictId(window.parent),n=await findStateLocationKey(t);let a=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${n}/main.csv`);if("ontouchstart"in document.documentElement){const e=100;a=a.slice(-e)}const i=a.map((e,t)=>e.new_confirmed&&""!==e.new_confirmed?t:null).filter(e=>e)[0],o=(a=a.slice(i))[0].subregion1_name,c=a.map((e,t)=>{const n=Math.max(0,t-14),i=a.slice(n,t).reduce((e,t)=>e+(parseInt(t.new_confirmed)||0),0);return{Date:e.date,Cases:i}});await loadGoogleCharts(["corechart"]),new google.visualization.ColumnChart(e).draw(recordsToDataTable(c),Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Estimated active cases in ${o}`,colors:["#FB780F"]})),e.parentElement.style.visibility="visible"}();</script>
 </div>
 </div>
 
 <div>
     <div class="spacer"></div>
-    <!-- Chart dependencies -->
-<!-- Google Charts -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-<!-- CSV Parsing -->
-<script type="text/javascript" src="../third_party/papaparse/papaparse.min.js"></script>
-
-<!-- Custom dependencies for data handling -->
-<script type="text/javascript" src="../static/data-loader.min.js"></script>
-
-<!-- Configuration loading -->
-<script type="text/javascript">CACHE=window.CACHE||{CSV:{},gcharts:{}},DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((t,o)=>Object.assign(t,{[o]:sessionStorage.getItem(o)||DEFAULT_OPTIONS[o]}),{}),GOOGLE_CHARTS_CONFIG=window.GOOGLE_CHARTS_CONFIG||{theme:"material",colors:["#FB780F"],legend:{position:CURRENT_OPTIONS.chart_legend_position||"none"},chartArea:{width:"100%",height:"100%",left:parseInt(CURRENT_OPTIONS.chart_padding_left||64),bottom:parseInt(CURRENT_OPTIONS.chart_padding_bottom||48),top:parseInt(CURRENT_OPTIONS.chart_padding_top||24)},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:parseInt(CURRENT_OPTIONS.chart_height||300)};</script>
-
-<!-- Wrap the whole widget into a DIV -->
+    <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
     <p style="text-align: end; font-size: small;">
     Data from <a href="https://github.com/GoogleCloudPlatform/covid-19-open-data" target="_blank">
@@ -282,26 +171,13 @@
     </a>
 </p>
 
-    <script async>!async function(){const e=document.createElement("div");document.currentScript.parentElement.prepend(e);const t=await async function(){const e=new URLSearchParams(location.search).get("district_id");return`US_${(await loadCSV(`${CURRENT_OPTIONS["tcm-metadata-url"]}`)).filter(t=>t.district_id===e)[0].state}`}(),a=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${t}/main.csv`),n=a[0].subregion1_name,r=["search_trends_fever","search_trends_cough","search_trends_common_cold","search_trends_pneumonia"],i=a.filter(e=>r.some(t=>""!==e[t])).map(e=>{const t={Date:e.date};return r.forEach(a=>t[(e=>e.split("_").slice(2).join(" "))(a)]=parseFloat(e[a])),t});await loadGoogleCharts(["corechart"]),new google.visualization.LineChart(e).draw(recordsToDataTable(i),Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Google Search Trends in ${n}`,curveType:"function",legend:{position:"in"},colors:void 0})),e.parentElement.style.visibility="visible"}();</script>
+    <script async>!async function(){const e=document.createElement("div");document.currentScript.parentElement.prepend(e);const t=getWindowDistrictId(window)||getWindowDistrictId(window.parent),n=await findStateLocationKey(t),a=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${n}/main.csv`),i=a[0].subregion1_name,o=["search_trends_fever","search_trends_cough","search_trends_common_cold","search_trends_pneumonia"],r=a.filter(e=>o.some(t=>""!==e[t])).map(e=>{const t={Date:e.date};return o.forEach(n=>t[(e=>e.split("_").slice(2).join(" "))(n)]=parseFloat(e[n])),t});await loadGoogleCharts(["corechart"]),new google.visualization.LineChart(e).draw(recordsToDataTable(r),Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Google Search Trends in ${i}`,curveType:"function",legend:{position:"in"},colors:void 0})),e.parentElement.style.visibility="visible"}();</script>
 </div>
 </div>
 
 <div>
     <div class="spacer"></div>
-    <!-- Chart dependencies -->
-<!-- Google Charts -->
-<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-<!-- CSV Parsing -->
-<script type="text/javascript" src="../third_party/papaparse/papaparse.min.js"></script>
-
-<!-- Custom dependencies for data handling -->
-<script type="text/javascript" src="../static/data-loader.min.js"></script>
-
-<!-- Configuration loading -->
-<script type="text/javascript">CACHE=window.CACHE||{CSV:{},gcharts:{}},DEFAULT_OPTIONS=window.DEFAULT_OPTIONS||{"tcm-metadata-url":"https://storage.googleapis.com/school-districts/school-districts-metadata.csv","cod-data-url":"https://storage.googleapis.com/covid19-open-data/v3","tcm-data-url":"https://storage.googleapis.com/school-districts/cases/latest-school-cases.csv"},CURRENT_OPTIONS=window.CURRENT_OPTIONS||Object.keys(DEFAULT_OPTIONS).reduce((t,o)=>Object.assign(t,{[o]:sessionStorage.getItem(o)||DEFAULT_OPTIONS[o]}),{}),GOOGLE_CHARTS_CONFIG=window.GOOGLE_CHARTS_CONFIG||{theme:"material",colors:["#FB780F"],legend:{position:CURRENT_OPTIONS.chart_legend_position||"none"},chartArea:{width:"100%",height:"100%",left:parseInt(CURRENT_OPTIONS.chart_padding_left||64),bottom:parseInt(CURRENT_OPTIONS.chart_padding_bottom||48),top:parseInt(CURRENT_OPTIONS.chart_padding_top||24)},titlePosition:"in",axisTitlesPosition:"in",hAxis:{textPosition:"bottom"},vAxis:{textPosition:"in",viewWindow:{min:0}},height:parseInt(CURRENT_OPTIONS.chart_height||300)};</script>
-
-<!-- Wrap the whole widget into a DIV -->
+    <!-- Wrap the whole widget into a DIV -->
 <div style="visibility: hidden;">
     <p style="text-align: end; font-size: small;">
     Data from <a href="https://github.com/GoogleCloudPlatform/covid-19-open-data" target="_blank">
@@ -309,7 +185,7 @@
     </a>
 </p>
 
-    <script async>!async function(){const t=document.currentScript.parentElement,e=await async function(){const t=new URLSearchParams(location.search).get("district_id");return`US_${(await loadCSV(`${CURRENT_OPTIONS["tcm-metadata-url"]}`)).filter(e=>e.district_id===t)[0].state}`}(),a=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${e}/main.csv`),i=a[0].subregion1_name,o=a[0],n=Object.keys(a[0]).filter(t=>t.startsWith("population_age_"));if(n.length>0&&n.every(t=>""!==o[t])){const e=document.createElement("div");t.prepend(e);const a=n.map(t=>({"Age Group":t.replace("population_age_","").replace("_and_older"," and older").replace("_"," - "),Population:parseInt(o[t])}));await loadGoogleCharts(["corechart"]);const r=new google.visualization.ColumnChart(e),s=Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Age-stratified demographics of ${i}`,colors:["#4E342E"],vAxis:{textPosition:"out",viewWindow:{min:0}},hAxis:{textPosition:"bottom",slantedText:!1,slantedTextAngle:0}});s.chartArea=Object.assign({},s.chartArea,{bottom:32}),r.draw(recordsToDataTable(a),s),e.parentElement.style.visibility="visible"}else t.style.display="none"}();</script>
+    <script async>!async function(){const t=document.currentScript.parentElement,e=getWindowDistrictId(window)||getWindowDistrictId(window.parent),a=await findStateLocationKey(e),o=await loadCSV(`${CURRENT_OPTIONS["cod-data-url"]}/${a}/main.csv`),i=o[0].subregion1_name,n=o[0],r=Object.keys(o[0]).filter(t=>t.startsWith("population_age_"));if(r.length>0&&r.every(t=>""!==n[t])){const e=document.createElement("div");t.prepend(e);const a=r.map(t=>({"Age Group":t.replace("population_age_","").replace("_and_older"," and older").replace("_"," - "),Population:parseInt(n[t])}));await loadGoogleCharts(["corechart"]);const o=new google.visualization.ColumnChart(e),s=Object.assign({},GOOGLE_CHARTS_CONFIG,{title:`Age-stratified demographics of ${i}`,colors:["#4E342E"],vAxis:{textPosition:"out",viewWindow:{min:0}},hAxis:{textPosition:"bottom",slantedText:!1,slantedTextAngle:0}});s.chartArea=Object.assign({},s.chartArea,{bottom:32}),o.draw(recordsToDataTable(a),s),e.parentElement.style.visibility="visible"}else t.style.display="none"}();</script>
 </div>
 </div>
 

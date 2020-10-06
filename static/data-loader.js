@@ -44,3 +44,27 @@ function loadGoogleCharts(packages = ['corechart']) {
     CACHE['gcharts'][cacheKey] = google.charts.load('current', { packages: packages });
     return CACHE['gcharts'][cacheKey];
 }
+
+function getWindowDistrictId(window_) {
+    return new URLSearchParams(window_.location.search).get('district_id');
+}
+
+async function findStateLocationKey(districtId) {
+    const metadata = await loadCSV(`${CURRENT_OPTIONS['tcm-metadata-url']}`);
+    const districtMetadata = metadata.filter(row => row.district_id === districtId)[0];
+    return `US_${districtMetadata.state}`;
+}
+
+async function findCountyLocationKey(districtId) {
+    const metadata = await loadCSV(`${CURRENT_OPTIONS['tcm-metadata-url']}`);
+    const districtMetadata = metadata.filter(row => row.district_id === districtId)[0];
+
+    // Some district IDs are actually FIPS
+    const zipIndex = await loadCSV(`${CURRENT_OPTIONS['zip-data-url']}`);
+    if (zipIndex.filter(row => row.fips === districtId).length > 0) {
+        return `US_${districtMetadata.state}_${districtId}`;
+    } else {
+        const fips = zipIndex.filter(row => row.zip === districtMetadata.zip_code)[0].fips;
+        return `US_${districtMetadata.state}_${fips}`;
+    }
+}
