@@ -46,6 +46,14 @@
                 }
                 elem.innerHTML = tableData;
 
+                // Add source of data as a footnote if available
+                if (latestDistrictData.source) {
+                    const footnote = document.createElement('p');
+                    footnote.classList.add('footnote');
+                    footnote.innerHTML = `Data from ${latestDistrictData.source}`;
+                    rootElement.append(footnote);
+                }
+
                 // Unhide element
                 elem.parentElement.style.visibility = 'visible';
 

@@ -213,3 +213,10 @@ button.centered {
     .hide-s {
         display: none;
 }}
+
+p.footnote {
+    text-align: right;
+    font-size: small;
+    white-space: nowrap;
+    overflow-x: auto;
+}

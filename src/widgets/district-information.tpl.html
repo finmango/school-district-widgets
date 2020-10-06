@@ -27,15 +27,22 @@
                 tableData += `<tr><td><b>Number of Schools</b></td><td>${districtMetadata.school_count}</td></tr>`;
             }
             if (districtMetadata.student_count) {
-                tableData += `<tr><td><b>Total Student Count</b></td><td>${districtMetadata.student_count}</td></tr>`;
+                tableData += `<tr><td><b>Total Student Count as of 2019</b></td><td>${districtMetadata.student_count}</td></tr>`;
             }
             if (districtMetadata.teacher_count) {
-                tableData += `<tr><td><b>Total Teacher Count</b></td><td>${districtMetadata.teacher_count}</td></tr>`;
+                tableData += `<tr><td><b>Total Teacher Count as of 2019</b></td><td>${districtMetadata.teacher_count}</td></tr>`;
             }
 
             // If there's no data available, say so
             if (tableData === header) {
                 tableData += `<tr><td colspan=2>No data available for this school district</td></tr>`;
+
+                // Otherwise cite the source
+            } else {
+                const footnote = document.createElement('p');
+                footnote.classList.add('footnote');
+                footnote.innerHTML = `Data from <a href="https://nces.ed.gov/ccd/">NCES Common Core of Data</a>`;
+                rootElement.append(footnote);
             }
 
             elem.innerHTML = tableData;
