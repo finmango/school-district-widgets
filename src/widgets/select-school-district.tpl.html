@@ -84,7 +84,7 @@
 
             selectElement.addEventListener('change', event => {
                 const path = window.location.href.indexOf('/embed/') === -1 ? 'report/index.html' : 'embed/report.html';
-                window.goto(`{{root}}/${path}?district_id=${selectElement.value}`);
+                window.location.href = `{{root}}/${path}?district_id=${selectElement.value}`;
             });
 
             // Enable selector

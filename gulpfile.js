@@ -82,7 +82,7 @@ gulp.task('build:html', function () {
         { name: pckg.displayName, description: pckg.description },
         // Add variables from context
         { env: env, year: new Date().getFullYear() },
-    )
+    );
 
     // Perform rendering
     return gulp.src(['src/**/*.html', '!src/**/*.tpl.html'])
