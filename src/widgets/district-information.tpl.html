@@ -27,7 +27,8 @@
                 tableData += `<tr><td><b>Total Student Count as of 2019</b></td><td>${districtMetadata.student_count}</td></tr>`;
             }
             if (districtMetadata.teacher_count) {
-                tableData += `<tr><td><b>Total Teacher Count as of 2019</b></td><td>${districtMetadata.teacher_count}</td></tr>`;
+                const roundedTeacherCount = Math.round(districtMetadata.teacher_count);
+                tableData += `<tr><td><b>Total Teacher Count as of 2019</b></td><td>${roundedTeacherCount}</td></tr>`;
             }
 
             // If there's no data available, say so

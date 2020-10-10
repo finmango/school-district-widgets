@@ -22,7 +22,7 @@
                 dict['sum_staff_cases'] += parseInt(row['new_student_cases']) || 0;
                 return dict;
             }, { 'sum_student_cases': 0, 'sum_staff_cases': 0 });
-            const latestDistrictData = districtData[districtData.length - 1] || {};
+            const latestDistrictData = districtData.sort((a, b) => a.date.localeCompare(b.date)).slice(-1)[0] || {};
             const studentCaseCount = latestDistrictData.cumulative_student_cases || sumDistrictData.sum_student_cases;
             const staffCaseCount = latestDistrictData.cumulative_staff_cases || sumDistrictData.sum_staff_cases;
 
@@ -46,7 +46,7 @@
                 // Add source of data as a footnote if available
                 if (latestDistrictData.source) {
                     const citation = `Data from ${latestDistrictData.source}`;
-                    attachElement('p', {'className': 'footnote', 'innerHTML': citation}, rootElement);
+                    attachElement('p', { 'className': 'footnote', 'innerHTML': citation }, rootElement);
                 }
 
                 // Unhide element
